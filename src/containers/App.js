@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import Image from "./Image"
+import Head from './components/helmet'
 // const bus = _bus.bus({ url: "amqp://wugaruqk:1WfsfZum9rQKHhBiq5Z4OvJ6ZkFqn9Gc@rhino.rmq.cloudamqp.com/wugaruqk" });
 
 // var Stomp = require('stomp-client');
@@ -20,6 +21,7 @@ class AppBase extends Component {
         }
     }
     componentDidMount() {
+        // document.title = "Kutekiu - Amazing Page";
         // client.connect(function (sessionId) {
         //     client.subscribe(destination, function (body, headers) {
         //         console.log('This is the body of a message on the subscribed queue:', body);
@@ -32,8 +34,9 @@ class AppBase extends Component {
     render() {
         return (
             <div>
+                <Head />
                 <Image />
-            </div>
+            </div >
         );
     }
 }

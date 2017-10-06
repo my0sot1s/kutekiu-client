@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions/image'
+import Loader from './components/loader'
 import _ from 'lodash';
 require("./image.css")
 
@@ -10,25 +11,71 @@ class Image extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: null
+            data: null,
+            page: 0, limit: 9,
+            doUpdate: false,
+            noItem: false
+        }
+    }
+    /**
+     * 
+     * @param {number} limit 
+     * @param {number} page 
+     */
+    fetchAction(page) {
+        if (!page) page = 0;
+        this.props.dsac.getImages(
+            `https://kutekiu.herokuapp.com/api/Image/getImage?limit=${this.state.limit}&page=${page}`);
+    }
+    componentDidMount() {
+        this.fetchAction();
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+    }
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll.bind(this));
+    }
+    handleScroll(e) {
+
+        var scrollTop = document.documentElement.scrollTop,
+            scrollHeight = document.documentElement.scrollHeight,
+            possion = scrollHeight - document.documentElement.clientHeight;
+        if (scrollTop / possion > 0.75 && !this.state.doUpdate) {
+            this.setState((prevState) => ({
+                page: prevState.page + 1,
+                doUpdate: true
+            }), () => {
+                this.fetchAction(this.state.page);
+            });
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        let _src = []
+        if (nextProps.image.data.length === 0) { alert("Éo còn item.Liên Lạc Tể để get more Auto scroll limit"); return; }
+        nextProps.image.data.map(value => {
+            _src.push({ src: value.data, thumbnail: value.data });
+        })
+        let _temp = _.chunk(_src, Math.floor(_src.length / 3));
+        if (this.state.page === 0) {
+            this.setState({
+                data: _temp
+            })
+        } else {
+            this.setState((prevState) => {
+                debugger
+                return {
+                    data: [
+                        [...prevState.data[0], ..._temp[0]],
+                        [...prevState.data[1], ..._temp[1]],
+                        [...prevState.data[2], ..._temp[2]]
+                    ],
+                    doUpdate: false
+                }
+            })
         }
     }
 
-    componentDidMount() {
-        this.props.dsac.getImages("https://kutekiu.herokuapp.com/api/Image/getImage?limit=12")
-    }
-    componentWillReceiveProps(nextProps) {
-        var src = [];
-        nextProps.image.data.map(value => {
-            src.push({ src: value.data, thumbnail: value.data });
-        })
-        this.setState({
-            data: _.chunk(src, Math.floor(src.length / 3))
-        })
-    }
-
-    renderItem(src, tag) {
-        return (<div className="item">
+    renderItem(src, tag, key) {
+        return (<div className="item" key={key}>
             <img src={src} tag={tag} />
             <div className="wrapper">
                 <div className="btn"></div>
@@ -37,14 +84,14 @@ class Image extends Component {
     }
     renderContent(array) {
         return (
-            <div className="content">
-                {array.map(value => { return this.renderItem(value.src, value.src) })}
+            <div className="content" ref="scroller">
+                {array.map((value, key) => { return this.renderItem(value.src, value.src, key) })}
             </div>
         )
     }
     render() {
         if (!this.state.data) {
-            return <div>Loading...</div>;
+            return <Loader />;
         }
         let pim = [];
         for (var i = 0; i < 3; i++) {
