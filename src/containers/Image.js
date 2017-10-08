@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/image'
 import Loader from './components/loader'
 import _ from 'lodash';
+import Modal from "./components/modal"
 require("./image.css")
 
 
@@ -14,7 +15,11 @@ class Image extends Component {
             data: null,
             page: 0, limit: 9,
             doUpdate: false,
-            noItem: false
+            noItem: false,
+            showModal: false,
+
+
+            img: "", tag: ""
         }
     }
     /**
@@ -42,26 +47,27 @@ class Image extends Component {
         if (scrollTop / possion > 0.75 && !this.state.doUpdate) {
             this.setState((prevState) => ({
                 page: prevState.page + 1,
-                doUpdate: true
+                doUpdate: true,
+                showModal: false
             }), () => {
                 this.fetchAction(this.state.page);
             });
         }
     }
+    showModal(image, tag) {
+        this.setState({ image, tag, showModal: true })
+    }
     componentWillReceiveProps(nextProps) {
         let _src = []
         if (nextProps.image.data.length === 0) { alert("Éo còn item.Liên Lạc Tể để get more Auto scroll limit"); return; }
-        nextProps.image.data.map(value => {
-            _src.push({ src: value.data, thumbnail: value.data });
-        })
+        nextProps.image.data.map(value => _src.push({ src: value.data, thumbnail: value.data }))
         let _temp = _.chunk(_src, Math.floor(_src.length / 3));
-        if (this.state.page === 0) {
+        if (this.state.page === 0 && (!this.state.data || this.state.data.length === 0)) {
             this.setState({
                 data: _temp
             })
         } else {
             this.setState((prevState) => {
-                debugger
                 return {
                     data: [
                         [...prevState.data[0], ..._temp[0]],
@@ -75,12 +81,14 @@ class Image extends Component {
     }
 
     renderItem(src, tag, key) {
-        return (<div className="item" key={key}>
-            <img src={src} tag={tag} />
-            <div className="wrapper">
-                <div className="btn"></div>
-            </div>
-        </div>)
+        return (
+            <div className="item" key={key}
+                onClick={() => this.showModal(src, tag)}>
+                <img src={src} tag={tag} />
+                <div className="wrapper">
+                    <div className="btn"></div>
+                </div>
+            </div>)
     }
     renderContent(array) {
         return (
@@ -98,8 +106,12 @@ class Image extends Component {
             pim.push(this.renderContent(this.state.data[i]));
         }
         return (
+
             <div className="container">
                 {pim}
+                <Modal showModal={this.state.showModal}>
+                    <img src={this.state.image} tag={this.state.tag} />
+                </Modal>
             </div>
         );
     }
