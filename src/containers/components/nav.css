@@ -1,0 +1,104 @@
+nav{
+    height: 99%;
+    width: 17.5%;
+    position: fixed;
+    background: rgba(238, 238, 238, 0.37);
+    box-shadow: 1px 1px 2px rgba(199, 199, 199, 0.644);
+    display: flex;
+    flex-direction: column;
+    /* margin-right: 15%;
+    margin-left: 15%; */
+    align-items: flex-start;
+    /* justify-content: center; */
+}
+.nav_wraper{
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 95%;
+}
+.nav_own{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.nav_avatar{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    background: #fff;
+}
+.nav_name{
+    margin-left: 30px;
+}
+#nav_search{
+    height: 25px;
+    width: 90%;
+    margin-top: 10px;
+    padding: 5px;
+    border: none;
+}
+.nav_menu{
+    margin-top: 5px;
+    width: 100%;
+}
+.nav_ul_menu{
+    /* margin-left: 20px; */
+    display: flex;
+    flex-direction: row;
+}
+.nav_ul_menu li{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    flex:1;
+    /* background: #eee; */
+}
+.nav_ul_menu li a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav_ul_menu li a i{
+    /* margin: 7px; */
+    font-size: 1.3em;
+    color: rgb(121, 121, 121)
+}
+.post{
+    height: fit-content;
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background: rgba(238, 238, 238, 0.425);
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 10px;
+    /* box-shadow: 1px 1px 1px rgba(194, 193, 193, 0.575);
+    justify-content: center;
+    align-items: center; */
+}
+.post textarea{
+    resize: none;
+    box-sizing: border-box;
+    font-size: 0.75em;
+    padding: 5px;
+    width:100%;
+    /* border-color: rgba(170, 170, 170, 0.692); */
+    border: none;
+
+}
+.post_add_img{
+    background: #fff;
+    height: 60px;
+    margin-top:10px;
+    width: 100%;
+    display: none;
+}
+input[type=button]{
+    height: 40px;
+    width: 100%;
+    margin-top: 10px;
+    background-color: #eee;
+    border: none;
+    border-radius: 5px;
+}
