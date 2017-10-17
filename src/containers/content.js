@@ -1,181 +1,58 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '../actions/image'
-import Loader from './components/loader'
+import * as actions from '../actions/timeline'
+import Cell from './renderCell/cell'
+// import Loader from './components/loader'
 import _ from 'lodash';
 // import Modal from "./components/modal"
 require("./content.css")
 
 
 class Content extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            tbLeft: [],
+            tbRight: []
+        }
+    }
+    componentDidMount() {
+        this.props.acts.getTimeline(
+            `https://kutekiu.herokuapp.com/api/social_timelines/getTimeLine?limit=6&page=1`);
+    }
+    componentWillReceiveProps(nextProps) {
+        let _d = nextProps.timeline.data, tbLeft = [], tbRight = []
+        for (var i = 0; i < _d.length; i++) {
+            if (i % 2 === 0) tbLeft.push(_d[i])
+            else tbRight.push(_d[i])
+        }
+        this.setState({ tbLeft, tbRight })
+    }
+
     render() {
-        return (
-            <div class="container">
-                <div class="content">
-                    <div class="content_item">
-                        <div class="content_avatar">
-                            <div class="content_avatar_img">
-                            </div>
-                        </div>
-                        <div class="content_user">
-                            <div class="content_user_name">
-                                <a href="#">Mạnh Tể</a>
-                            </div>
-                            <div class="content_user_date">1 min ago
-                        </div>
-                        </div>
-                        <div class="content_img">
-                            <img src="https://i.imgur.com/UciaRkK.jpg" alt="" />
-                            <img src="https://i.imgur.com/4YZBgSH.jpg" alt="" />
-                            <img src="https://i.imgur.com/nyKmwNC.jpg" alt="" />
-                        </div>
-                        <div class="content_action">
-                            <div class="content_action_access">
-                                <div class="action_item">
-                                    <a href="#">
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="action_item">
-                                    <a href="#">
-                                        <i class="fa fa-random" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="action_item">
-                                    <a href="">
-                                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <ul class="content_comment">
-                            <li>
-                                <input type="text" placeholder="Nhập comment..." />
-                            </li>
-                            <li class="comment_item">
-                                <div class="comment_header">
-                                    <div class="comment_avatar"></div>
-                                    <div class="comment_name_detail">
-                                        <div class="comment_name_detail_name">
-                                            <a href="">Minh Hoài</a>
-                                        </div>
-                                        <div class="comment_name_detail_date">1 min ago</div>
-                                    </div>
-                                    <div class="comment_options">
-                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="comment_content">
-                                    <div class="comment_content_text">
-                                        Lâu lâu mới lại leo núi :v #hongha
-                                </div>
-                                </div>
-                            </li>
-                            <li class="comment_item">
-                                <div class="comment_header">
-                                    <div class="comment_avatar"></div>
-                                    <div class="comment_name_detail">
-                                        <div class="comment_name_detail_name">
-                                            <a href="">Hoàng Hiệp</a>
-                                        </div>
-                                        <div class="comment_name_detail_date">1 h ago</div>
-                                    </div>
-                                    <div class="comment_options">
-                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="comment_content">
-                                    <div class="comment_content_text">
-                                        ảnh đẹp quá
-                                    <span>
-                                            <a href="#">...more</a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#">View more ...</a>
-                            </li>
-                        </ul>
+        if (this.state.tbLeft.length === 0)
+            return <div></div>
+        else
+            return (
+                <div className="container">
+                    <div className="content">
+                        {this.state.tbLeft.map((value, index) => {
+                            return <Cell data={value} />
+                        })}
                     </div>
-                    <div class="content_item">
-                        <div class="content_avatar">
-                            <div class="content_avatar_img">
-                            </div>
-                        </div>
-                        <div class="content_user">Mạnh Tể 2</div>
-                        <div class="content_img">
-                            <img src="https://i.imgur.com/kr0zUry.jpg" alt="" />
-                        </div>
-                        <div class="content_action">
-                            <div class="content_action_access">
-                                <div class="action_item">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </div>
-                                <div class="action_item">
-                                    <i class="fa fa-random" aria-hidden="true"></i>
-                                </div>
-                                <div class="action_item">
-                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                </div>
-                            </div>
-
-
-                        </div>
+                    <div className="content">
+                        {this.state.tbRight.map((value, index) => {
+                            return <Cell data={value} />
+                        })}
                     </div>
-                </div>
-                <div class="content">
-                    <div class="content_item">
-                        <div class="content_avatar">
-                            <div class="content_avatar_img">
-                            </div>
-                        </div>
-                        <div class="content_user">Mạnh Tể 3</div>
-                        <div class="content_img">
-                            <img src="https://i.imgur.com/82RIhi2.jpg" alt="" />
-                        </div>
-                        <div class="content_action">
-                            <div class="content_action_access">
-                                <div class="action_item">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </div>
-                                <div class="action_item">
-                                    <i class="fa fa-random" aria-hidden="true"></i>
-                                </div>
-                                <div class="action_item">
-                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content_item">
-                        <div class="content_avatar">
-                            <div class="content_avatar_img">
-                            </div>
-                        </div>
-                        <div class="content_user">Mạnh Tể 4</div>
-                        <div class="content_img">
-                            <img src="https://i.imgur.com/v6Tj8Ee.jpg" alt="" />
-                        </div>
-                        <div class="content_action">
-                            <div class="content_action_access">
-                                <div class="action_item">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </div>
-                                <div class="action_item">
-                                    <i class="fa fa-random" aria-hidden="true"></i>
-                                </div>
-                                <div class="action_item">
-                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
+                </div >
+            );
     }
 }
-export default Content
+export default connect(
+    // mapStateToProps
+    state => ({ timeline: state.timeline }),
+    // mapDispatchToProps
+    dispatch => ({ acts: bindActionCreators(actions, dispatch) })
+)(Content)
