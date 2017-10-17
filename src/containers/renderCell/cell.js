@@ -2,6 +2,7 @@ import React from 'react'
 
 import Comment from "../comments/comment"
 import Action from "../actions/actions"
+import { timeAgo } from "../../utils/timeProcess"
 require("./cell.css")
 
 export default (props) => (
@@ -14,7 +15,7 @@ export default (props) => (
             <div class="content_user_name">
                 <p>
                     <a href="#">{props.data.user.displayName}</a>
-                    <span>- 1 min ago</span>
+                    <span>- {timeAgo(props.data.post.created)} ago</span>
                 </p>
             </div>
 
