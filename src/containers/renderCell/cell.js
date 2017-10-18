@@ -3,6 +3,8 @@ import React from 'react'
 import Comment from "../comments/comment"
 import Action from "../actions/actions"
 import { timeAgo } from "../../utils/timeProcess"
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+
 require("./cell.css")
 
 export default (props) => (
@@ -14,7 +16,8 @@ export default (props) => (
         <div className="content_user">
             <div class="content_user_name">
                 <p>
-                    <a href="#">{props.data.user.displayName}</a>
+                    {/* <a href="#">{props.data.user.displayName}</a> */}
+                    <Link to={`/profile/${props.data.post.user_id}`}>{props.data.user.displayName}</Link>
                     <span>- {timeAgo(props.data.post.created)} ago</span>
                 </p>
             </div>

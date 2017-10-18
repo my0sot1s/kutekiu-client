@@ -3,11 +3,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions/timeline'
 import Cell from './renderCell/cell'
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+
 // import Loader from './components/loader'
 import _ from 'lodash';
 // import Modal from "./components/modal"
 require("./content.css")
-
 
 class Content extends Component {
     constructor(props) {
@@ -82,18 +83,19 @@ class Content extends Component {
             return <div></div>
         else
             return (
-                <div className="container">
-                    <div className="content">
-                        {this.state.tbLeft.map((value, index) => {
-                            return <Cell data={value} />
-                        })}
-                    </div>
-                    <div className="content">
-                        {this.state.tbRight.map((value, index) => {
-                            return <Cell data={value} />
-                        })}
-                    </div>
-                </div >
+                    <div className="container">
+
+                        <div className="content">
+                            {this.state.tbLeft.map((value, index) => {
+                                return <Cell data={value} />
+                            })}
+                        </div>
+                        <div className="content">
+                            {this.state.tbRight.map((value, index) => {
+                                return <Cell data={value} />
+                            })}
+                        </div>
+                    </div >
             );
     }
 }
