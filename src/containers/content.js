@@ -14,20 +14,67 @@ class Content extends Component {
         super(props);
         this.state = {
             tbLeft: [],
-            tbRight: []
+            tbRight: [],
+            page: 0, limit: 6,
+            doUpdate: false,
+            date: new Date()
         }
+    }
+    /**
+     * 
+     * @param {number} limit 
+     * @param {number} page 
+     */
+    fetchAction(page) {
+        if (!page) page = 0;
+        this.props.acts.getTimeline(
+            `https://kutekiu.herokuapp.com/api/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}&date=${this.state.date.toDateString()}`);
     }
     componentDidMount() {
-        this.props.acts.getTimeline(
-            `https://kutekiu.herokuapp.com/api/social_timelines/getTimeLine?limit=6&page=1`);
+        this.fetchAction()
+        // window.addEventListener('scroll', this.handleScroll.bind(this));
+    }
+    componentWillUnmount() {
+        // window.removeEventListener('scroll', this.handleScroll.bind(this));
+    }
+    handleScroll(e) {
+        var scrollTop = document.documentElement.scrollTop,
+            scrollHeight = document.documentElement.scrollHeight,
+            possion = scrollHeight - document.documentElement.clientHeight;
+        if (scrollTop / possion > 0.75 && !this.state.doUpdate) {
+            this.setState((prevState) => ({
+                page: prevState.page + 1,
+                doUpdate: true,
+                // showModal: false
+            }), () => {
+                this.fetchAction(this.state.page);
+            });
+        }
     }
     componentWillReceiveProps(nextProps) {
-        let _d = nextProps.timeline.data, tbLeft = [], tbRight = []
-        for (var i = 0; i < _d.length; i++) {
-            if (i % 2 === 0) tbLeft.push(_d[i])
-            else tbRight.push(_d[i])
+        if (nextProps.timeline.meta.status === 201) {
+            console.log("False fetch server")
         }
-        this.setState({ tbLeft, tbRight })
+        else if (nextProps.timeline.meta.status === 200 && nextProps.timeline.data.length === 0) {
+            this.setState(prevState => {
+                let curd = new Date(prevState.date);
+                curd.setDate(curd.getDate() - 1)
+                return {
+                    date: curd
+                }
+            }, () => {
+                this.fetchAction(this.state.page)
+            })
+        }
+        else {
+            let _d = nextProps.timeline.data, tbLeft = [], tbRight = []
+            for (var i = 0; i < _d.length; i++) {
+                if (i % 2 === 0) tbLeft.push(_d[i])
+                else tbRight.push(_d[i])
+            }
+            this.setState({ tbLeft, tbRight })
+        }
+
     }
 
     render() {
