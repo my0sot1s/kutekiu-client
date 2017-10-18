@@ -1,2 +1,2 @@
 npm run prod
-serve -s build
+serve -s -p env:PORT
