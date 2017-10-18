@@ -12,8 +12,8 @@ export const timeAgo = date => {
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    if (days > 0) return days + 'days'
-    if (hours > 0) return hours + "h " + minutes + "min"
+    if (days > 0) return days + 'd'
+    if (hours > 0) return hours + "h " + minutes + "m"
     if (minutes > 0) return minutes + "min"
-    if (seconds > 0) return seconds + "secs"
+    if (seconds > 0) return seconds + "sec"
 }

@@ -26,12 +26,14 @@ export default (props) => (
                 {props.data.post.post_content}
             </div>
         </div>
-        <div className="content_img">
-            {props.data.post.media.map(med => {
-                return <img src={med.url} alt={med.public_id} />
-            })}
+        <div class="main_content">
+            <div className="content_img">
+                {props.data.post.media.map(med => {
+                    return <img src={med.url} alt={med.public_id} />
+                })}
+            </div>
+            <Action />
+            <Comment />
         </div>
-        <Action />
-        <Comment />
     </div >
 )
