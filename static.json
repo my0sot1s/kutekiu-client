@@ -1,0 +1,8 @@
+{
+    "root": "build/",
+    "headers": {
+        "/**": {
+            "Strict-Transport-Security": "max-age=7776000"
+        }
+    }
+}

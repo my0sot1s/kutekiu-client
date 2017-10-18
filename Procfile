@@ -1,1 +1,1 @@
-serve -s
+web: bin/boot
