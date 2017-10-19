@@ -12,7 +12,7 @@
 .content{
     width: 50%;
     flex-basis: 50%;
-    margin:0.75em;
+    margin:0.25em;
     /* display: flex; */
     /* display: -webkit-flex; */
     flex-direction: column;
