@@ -14,7 +14,7 @@ class ImageUpload extends React.Component {
             addRemoveLinks: true,
             acceptedFiles: "image/jpeg,image/png,image/gif",
             autoProcessQueue: false,
-            maxFiles: 10,
+            maxFiles: 5,
         };
 
         this.componentConfig = {
@@ -41,9 +41,6 @@ class ImageUpload extends React.Component {
     }
     render() {
 
-        const config = this.componentConfig;
-        const djsConfig = this.djsConfig;
-
         // For a list of all possible events (there are many), see README.md!
         const eventHandlers = {
             addedfile: this.handleFileAdded.bind(this),
@@ -52,15 +49,15 @@ class ImageUpload extends React.Component {
 
 
         return (
-            <Modal showModal={this.state.showModal}>
-                <div className="main_body">
-                    <h2>Drop files here </h2>
-                    <div className="wraper">
-                        <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig} />
-                    </div>
-                    <note>Note: <span> Count lower 10 </span></note>
+            // <Modal showModal={this.state.showModal}>
+            <div className="main_body">
+                <div className="wraper">
+                    <DropzoneComponent config={this.componentConfig}
+                        eventHandlers={eventHandlers}
+                        djsConfig={this.djsConfig} />
                 </div>
-            </Modal>
+            </div>
+            // </Modal>
 
         )
     }

@@ -14,7 +14,7 @@ export default (props) => (
             <img src={props.data.user.avatar} tag={props.data.user.username} />
         </div>
         <div className="content_user">
-            <div class="content_user_name">
+            <div className="content_user_name">
                 <p>
                     {/* <a href="#">{props.data.user.displayName}</a> */}
                     <Link to={`/profile/${props.data.post.user_id}`}>{props.data.user.displayName}</Link>
@@ -22,18 +22,21 @@ export default (props) => (
                 </p>
             </div>
 
-            <div class="content_user_cap">
+            <div className="content_user_cap">
                 {props.data.post.post_content}
             </div>
         </div>
-        <div class="main_content">
+        <div className="main_content">
             <div className="content_img">
                 {props.data.post.media.map(med => {
                     return <img src={med.url} alt={med.public_id} />
                 })}
             </div>
+            <div className="content_count">
+                <p>{props.data.like} loves {props.data.comment.count} comments</p>
+            </div>
             <Action />
-            <Comment />
+            <Comment comment={props.data.comment.cmt} />
         </div>
     </div >
 )

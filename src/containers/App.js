@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Container from "./content"
 // import Container from "./image"
 import Head from './components/helmet'
-// import ImageUpload from './ImageUpload'
+import ImageUpload from './ImageUpload'
 import Nav from './components/nav'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import Profile from './profile'
@@ -27,11 +27,13 @@ class AppBase extends Component {
             <BrowserRouter>
                 <div id="app">
                     <Head />
+                    <ImageUpload />
                     <Switch>
                         <Route path="/profile/:user_id" component={Profile} />
                         <Route path="/" component={Container} />
                     </Switch>
-                    <code>v - 1.0.2</code>
+                    <code>v - 1.0.3 Comment and like now is real</code>
+
                 </div>
             </BrowserRouter>
 

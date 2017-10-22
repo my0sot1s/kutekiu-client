@@ -1,4 +1,5 @@
 import React from 'react'
+import { timeAgo } from "../../utils/timeProcess"
 require("./comment.css")
 
 export default (props) => (
@@ -11,7 +12,29 @@ export default (props) => (
                 </a>
             </span>
         </li>
-        <li className="comment_item">
+        {props.comment.map((v, i) => {
+            return (<li className="comment_item">
+                <div className="comment_header">
+                    {/* <div className="comment_avatar"></div> */}
+                    <img src={v.user.avatar} />
+                    <div className="comment_name_detail">
+                        <div className="comment_name_detail_name">
+                            <a href="">{v.user.displayName}</a>
+                        </div>
+                        <div className="comment_name_detail_date">{timeAgo(v.data.created)} ago</div>
+                    </div>
+                    <div className="comment_options">
+                        <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div className="comment_content">
+                    <div className="comment_content_text">
+                        {v.data.content}
+                    </div>
+                </div>
+            </li>)
+        })}
+        {/* <li className="comment_item">
             <div className="comment_header">
                 <div className="comment_avatar"></div>
                 <div className="comment_name_detail">
@@ -51,9 +74,9 @@ export default (props) => (
                     </span>
                 </div>
             </div>
-        </li>
+        </li> */}
         <li>
-            <a href="#">View more ...</a>
+            <a href="#">View more comment...</a>
         </li>
     </ul>
 )
