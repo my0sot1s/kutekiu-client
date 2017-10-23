@@ -5,16 +5,18 @@ import * as actions from '../actions/profile'
 import _ from 'lodash';
 import Sidebar from './sidebar/sidebar'
 import Cell from './renderCell/cell'
+import Loader from './loader/loader'
+
 require("./profile.css")
 
 class Profile extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            user_id:this.props.match.params.user_id,
-            page:0,limit:3,
-            user:null,
-            post:null
+        this.state = {
+            user_id: this.props.match.params.user_id,
+            page: 0, limit: 3,
+            user: null,
+            post: null
         }
     }
     /**
@@ -33,30 +35,30 @@ class Profile extends Component {
     }
     componentWillReceiveProps(nextProps) {
         this.setState({
-            user:nextProps.profile.data[0],
-            post:nextProps.profile.data[1]
+            user: nextProps.profile.data[0],
+            post: nextProps.profile.data[1]
         })
     }
-    
+
     render() {
-        if(!this.state.user)return <div/>
+        if (!this.state.user) return <Loader />
         return (
             <div class="container">
-                <Sidebar data={this.state.user}/>
+                <Sidebar data={this.state.user} />
                 <div className="content2">
-                  {this.state.post.map(post=>{
-                      return <Cell data={{post,user:this.state.user}}/>
-                  })}
+                    {this.state.post.map(post => {
+                        return <Cell data={{ post, user: this.state.user }} />
+                    })}
                 </div>
             </div>
         );
     }
 }
 
-export default 
-connect(
-    // mapStateToProps
-    state => ({ profile: state.profile }),
-    // mapDispatchToProps
-    dispatch => ({ acts: bindActionCreators(actions, dispatch) })
-)(Profile)
+export default
+    connect(
+        // mapStateToProps
+        state => ({ profile: state.profile }),
+        // mapDispatchToProps
+        dispatch => ({ acts: bindActionCreators(actions, dispatch) })
+    )(Profile)

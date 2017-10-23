@@ -7,6 +7,9 @@ import ImageUpload from './ImageUpload'
 import Nav from './components/nav'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import Profile from './profile'
+import Loader from './loader/loader'
+let fetch = require("../actions/fetcher").default;
+
 // import Footer from './components/Footer'
 // import Modal from "./components/modal"
 
@@ -15,29 +18,35 @@ class AppBase extends Component {
         super(props);
         this.state = {
             data: {},
+            services: [fetch("https://marcarita.herokuapp.com/"), fetch('https://kutekiu.herokuapp.com')]
         }
     }
     componentDidMount() {
+        // ping 2 service
+        Promise.all(this.state.services).then(doc => {
+            this.setState({ pingDone: true }, () => {
+                console.info("ping ping")
+            })
+        });
     }
-    showModal() {
-        this.setState({ showModal: true });
-    }
+    // showModal() {
+    //     this.setState({ showModal: true });
+    // }
     render() {
-        return (
-            <BrowserRouter>
-                <div id="app">
-                    <Head />
-                    <ImageUpload />
-                    <Switch>
-                        <Route path="/profile/:user_id" component={Profile} />
-                        <Route path="/" component={Container} />
-                    </Switch>
-                    <code>v - 1.0.3 Comment and like now is real</code>
+        if (!this.state.pingDone) return <Loader />
+        else
+            return (
+                <BrowserRouter>
+                    <div id="app">
+                        <Head />
+                        <Switch>
+                            <Route path="/profile/:user_id" component={Profile} />
+                            <Route path="/" component={Container} />
+                        </Switch>
+                    </div>
+                </BrowserRouter>
 
-                </div>
-            </BrowserRouter>
-
-        );
+            );
     }
 }
 

@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/timeline'
 import Cell from './renderCell/cell'
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-
+import Loader from './loader/loader'
+import ImageUpload from './ImageUpload'
 // import Loader from './components/loader'
 import _ from 'lodash';
 // import Modal from "./components/modal"
@@ -16,7 +17,7 @@ class Content extends Component {
         this.state = {
             tbLeft: [],
             tbRight: [],
-            page: 0, limit: 6,
+            page: 0, limit: 4,
             doUpdate: false,
             date: new Date()
         }
@@ -30,6 +31,7 @@ class Content extends Component {
         if (!page) page = 0;
         this.props.acts.getTimeline(
             `https://kutekiu.herokuapp.com/api/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}&date=${this.state.date.toDateString()}`);
+        // `http://localhost:3003/api/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}&date=${this.state.date.toDateString()}`);
     }
     componentDidMount() {
         this.fetchAction()
@@ -80,10 +82,12 @@ class Content extends Component {
 
     render() {
         if (this.state.tbLeft.length === 0)
-            return <div></div>
+            return <Loader />
         else
             return (
-                    <div className="container">
+                <div>
+                    <ImageUpload />
+                    <div className="container" >
 
                         <div className="content">
                             {this.state.tbLeft.map((value, index) => {
@@ -96,6 +100,7 @@ class Content extends Component {
                             })}
                         </div>
                     </div >
+                </div>
             );
     }
 }
