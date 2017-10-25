@@ -17,9 +17,9 @@ class Content extends Component {
         this.state = {
             tbLeft: [],
             tbRight: [],
-            page: 0, limit: 4,
+            page: 1, limit: 4,
             doUpdate: false,
-            date: new Date()
+            // date: new Date()
         }
     }
     /**
@@ -28,9 +28,9 @@ class Content extends Component {
      * @param {number} page 
      */
     fetchAction(page) {
-        if (!page) page = 0;
+        if (!page) page = 1;
         this.props.acts.getTimeline(
-            `https://kutekiu.herokuapp.com/api/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}&date=${this.state.date.toDateString()}`);
+            `https://kutekiu.herokuapp.com/api/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}`);
         // `http://localhost:3003/api/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}&date=${this.state.date.toDateString()}`);
     }
     componentDidMount() {
