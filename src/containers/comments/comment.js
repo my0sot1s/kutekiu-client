@@ -20,7 +20,7 @@ export default (props) => (
                     <img src={v.user.avatar} />
                     <div className="comment_name_detail">
                         <div className="comment_name_detail_name">
-                            <Link to={`/profile/${i}`}>{v.user.displayName}</Link>
+                            <Link to={`/profile/${v.data.user_id}`}>{v.user.displayName}</Link>
                         </div>
                         <div className="comment_name_detail_date">{timeAgo(v.data.created)} ago</div>
                     </div>
