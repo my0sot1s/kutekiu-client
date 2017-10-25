@@ -17,8 +17,6 @@ class Image extends Component {
             doUpdate: false,
             noItem: false,
             showModal: false,
-
-
             img: "", tag: ""
         }
     }

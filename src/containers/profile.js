@@ -27,7 +27,8 @@ class Profile extends Component {
     fetchAction(page) {
         if (!page) page = 0;
         this.props.acts.getProfile(
-            `https://kutekiu.herokuapp.com/api/social_post/get-post?user_id=${this.state.user_id}&limit=${this.state.limit}&page=${page}`);
+            `http://localhost:3003/api/social_post/get-post?user_id=${this.state.user_id}&limit=${this.state.limit}&page=${page}`);
+        // `https://kutekiu.herokuapp.com/api/social_post/get-post?user_id=${this.state.user_id}&limit=${this.state.limit}&page=${page}`);
     }
     componentDidMount() {
         // https://kutekiu.herokuapp.com/api/social_post/get-post?user_id=18&limit=5
@@ -35,8 +36,8 @@ class Profile extends Component {
     }
     componentWillReceiveProps(nextProps) {
         this.setState({
-            user: nextProps.profile.data[0],
-            post: nextProps.profile.data[1]
+            user: nextProps.profile.data.user,
+            post: nextProps.profile.data.data
         })
     }
 
@@ -47,7 +48,12 @@ class Profile extends Component {
                 <Sidebar data={this.state.user} />
                 <div className="content2">
                     {this.state.post.map(post => {
-                        return <Cell data={{ post, user: this.state.user }} />
+                        return <Cell data={{
+                            post: post.post,
+                            like: post.like,
+                            comment: post.comment,
+                            user: this.state.user
+                        }} />
                     })}
                 </div>
             </div>
