@@ -13,7 +13,7 @@ class Image extends Component {
         super(props);
         this.state = {
             data: null,
-            page: 0, limit: 9,
+            page: 0, limit: 4,
             doUpdate: false,
             noItem: false,
             showModal: false,

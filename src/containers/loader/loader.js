@@ -18,6 +18,7 @@ export default () => (
             <li></li>
             <li></li>
         </ul>
-        <code>v - 1.0.3 Comment and like now is real</code>
+        <marquee behavior="scroll" direction="left"><code>v - 1.0.3 Comment and like now is real</code></marquee>
+
     </div>
 )

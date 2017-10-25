@@ -35,19 +35,19 @@ class Content extends Component {
     }
     componentDidMount() {
         this.fetchAction()
-        // window.addEventListener('scroll', this.handleScroll.bind(this));
+        window.addEventListener('scroll', this.handleScroll.bind(this));
     }
     componentWillUnmount() {
-        // window.removeEventListener('scroll', this.handleScroll.bind(this));
+        window.removeEventListener('scroll', this.handleScroll.bind(this));
     }
     handleScroll(e) {
         var scrollTop = document.documentElement.scrollTop,
             scrollHeight = document.documentElement.scrollHeight,
             possion = scrollHeight - document.documentElement.clientHeight;
-        if (scrollTop / possion > 0.75 && !this.state.doUpdate) {
+        if (scrollTop / possion > 0.7) {
             this.setState((prevState) => ({
                 page: prevState.page + 1,
-                doUpdate: true,
+                // doUpdate: true,
                 // showModal: false
             }), () => {
                 this.fetchAction(this.state.page);
@@ -55,29 +55,30 @@ class Content extends Component {
         }
     }
     componentWillReceiveProps(nextProps) {
+
         if (nextProps.timeline.meta.status === 201) {
             console.log("False fetch server")
         }
-        else if (nextProps.timeline.meta.status === 200 && nextProps.timeline.data.length === 0) {
-            this.setState(prevState => {
-                let curd = new Date(prevState.date);
-                curd.setDate(curd.getDate() - 1)
-                return {
-                    date: curd
-                }
-            }, () => {
-                this.fetchAction(this.state.page)
-            })
-        }
         else {
+            //render lần đầu tiên
             let _d = nextProps.timeline.data, tbLeft = [], tbRight = []
             for (var i = 0; i < _d.length; i++) {
                 if (i % 2 === 0) tbLeft.push(_d[i])
                 else tbRight.push(_d[i])
             }
-            this.setState({ tbLeft, tbRight })
-        }
+            this.setState(prevState => {
+                if (prevState.tbLeft.length > 0) {
+                    return {
+                        tbLeft: [...prevState.tbLeft, ...tbLeft],
+                        tbRight: [...prevState.tbRight, ...tbRight]
+                    }
+                }
+                else {
+                    return { tbLeft, tbRight }
+                }
 
+            })
+        }
     }
 
     render() {
