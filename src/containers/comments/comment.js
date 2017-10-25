@@ -1,5 +1,6 @@
 import React from 'react'
 import { timeAgo } from "../../utils/timeProcess"
+import { Link } from 'react-router-dom';
 require("./comment.css")
 
 export default (props) => (
@@ -19,7 +20,7 @@ export default (props) => (
                     <img src={v.user.avatar} />
                     <div className="comment_name_detail">
                         <div className="comment_name_detail_name">
-                            <a href="">{v.user.displayName}</a>
+                            <Link to={`/profile/${i}`}>{v.user.displayName}</Link>
                         </div>
                         <div className="comment_name_detail_date">{timeAgo(v.data.created)} ago</div>
                     </div>
