@@ -16,8 +16,10 @@ export default (props) => (
         <div className="content_user">
             <div className="content_user_name">
                 <p>
-                    {/* <a href="#">{props.data.user.displayName}</a> */}
-                    <Link to={`/profile/${props.data.post.user_id}`}>{props.data.user.displayName}</Link>
+                    <Link to={{
+                        pathname: `/profile/${props.data.user.username}`,
+                      
+                    }}>{props.data.user.displayName}</Link>
                     <span>- {timeAgo(props.data.post.created)} ago</span>
                 </p>
             </div>
@@ -27,11 +29,13 @@ export default (props) => (
             </div>
         </div>
         <div className="main_content">
-            <div className="content_img">
-                {props.data.post.media.map(med => {
-                    return <img src={med.url} alt={med.public_id} />
-                })}
-            </div>
+            <Link to={{pathname:`/post/${props.data.post.id}`,state: { modal: true }}}>
+                <div className="content_img" >
+                    {props.data.post.media.map(med => {
+                        return <img src={med.url} alt={med.public_id} />
+                    })}
+                </div>
+            </Link>
             <div className="content_count">
                 <p>{props.data.like} loves {props.data.comment.count} comments</p>
             </div>

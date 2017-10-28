@@ -41,12 +41,14 @@ class ActionComponent extends Component {
                             <i className={isLike ? this.state.like_icon2 : this.state.like_icon}
                                 aria-hidden="true"
                                 style={{ color: isLike ? this.state.like : this.state.unlike }}></i>
+                            <span>Love</span>
                         </a>
                         <span style={{ marginLeft: 1, fontSize: 15 }}>{isLike ? "+1" : ""}</span>
                     </div>
                     <div className="action_item">
                         <a onClick={this.clickAction.bind(this, 2)}>
                             <i className="fa fa-random" aria-hidden="true"></i>
+                            <span>Comment</span>
                         </a>
                     </div>
                     <div className="action_item">

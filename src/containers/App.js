@@ -8,6 +8,8 @@ import Nav from './components/nav'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import Profile from './profile'
 import Loader from './loader/loader'
+import DetailRender from './detailRender/detailRender'
+import Modal from './components/modal'
 let fetch = require("../actions/fetcher").default;
 
 // import Footer from './components/Footer'
@@ -21,6 +23,7 @@ class AppBase extends Component {
             services: [fetch("https://marcarita.herokuapp.com/"), fetch('https://kutekiu.herokuapp.com')]
         }
     }
+    previousLocation = this.props.location
     componentDidMount() {
         // ping 2 service
         Promise.all(this.state.services).then(doc => {
@@ -29,23 +32,38 @@ class AppBase extends Component {
             })
         });
     }
+    componentWillUpdate(nextProps) {
+        const { location } = this.props
+        // set previousLocation if props.location is not modal
+        if (
+            nextProps.history.action !== 'POP' &&
+            (!location.state || !location.state.modal)
+        ) {
+            this.previousLocation = this.props.location
+        }
+    }
     // showModal() {
     //     this.setState({ showModal: true });
     // }
     render() {
+        const { location } = this.props
+        const isModal = !!(
+            location.state &&
+            location.state.modal &&
+            this.previousLocation !== location // not initial render
+        )
         if (!this.state.pingDone) return <Loader />
         else
             return (
-                <BrowserRouter>
-                    <div id="app">
-                        <Head />
-                        <Switch>
-                            <Route path="/profile/:user_id" component={Profile} />
-                            <Route path="/" component={Container} />
-                        </Switch>
-                    </div>
-                </BrowserRouter>
-
+                <div id="app" >
+                    <Head />
+                    <Switch location={isModal ? this.previousLocation : location}>
+                        <Route exact path="/" component={Container} />
+                        <Route path="/profile/:username" component={Profile} />
+                        <Route path="/post/:post_id" component={DetailRender} />
+                    </Switch>
+                    {isModal ? <Route path='/post/:post_id' component={Modal} /> : null}
+                </div>
             );
     }
 }

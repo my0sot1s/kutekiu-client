@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DetailPost from '../detailRender/detail'
 require("./modal.css")
 
 class ModalControl extends Component {
@@ -7,8 +8,8 @@ class ModalControl extends Component {
     }
     componentDidMount() {
         // Get the modal
-        // this.refs.modal.style.display = "block";
-        // document.body.style = "overflow:hidden";
+        this.refs.modal.style.display = "block";
+        document.body.style = "overflow:hidden";
 
     }
     componentWillReceiveProps(nextProps) {
@@ -16,22 +17,25 @@ class ModalControl extends Component {
             this.refs.modal.style.display = "block";
             document.body.style = "overflow:hidden";
         }
-
+    }
+    back = (e) => {
+        e.stopPropagation()
+        this.props.history.goBack()
     }
 
-
-    handleClose = () => {
+    handleClose = (e) => {
         this.refs.modal.style.display = "none";
         document.body.style = "overflow:scroll;";
+        this.back(e)
     }
     render() {
-        return <div id="myModal" class="modal" ref="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close" onClick={this.handleClose.bind(this)}>&times;</span>
+        return <div id="myModal" className="modal" ref="modal">
+            <div className="modal-content">
+                <div className="modal-header">
+                    <span className="close" onClick={this.handleClose.bind(this)}>&times;</span>
                 </div>
-                <div class="modal-body">
-                    {this.props.children}
+                <div className="modal-body">
+                    <DetailPost {...this.props}/>
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@ class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user_id: this.props.match.params.user_id,
+            username: this.props.match.params.username,
             page: 0, limit: 3,
             user: null,
             post: null
@@ -28,7 +28,7 @@ class Profile extends Component {
         if (!page) page = 0;
         this.props.acts.getProfile(
             // `http://localhost:3003/api/social_post/get-post?user_id=${this.state.user_id}&limit=${this.state.limit}&page=${page}`);
-            `https://kutekiu.herokuapp.com/api/social_post/get-post?user_id=${this.state.user_id}&limit=${this.state.limit}&page=${page}`);
+            `https://kutekiu.herokuapp.com/api/social_post/get-user-post?username=${this.state.username}&limit=${this.state.limit}&page=${page}`);
     }
     componentDidMount() {
         // https://kutekiu.herokuapp.com/api/social_post/get-post?user_id=18&limit=5
