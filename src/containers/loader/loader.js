@@ -18,7 +18,7 @@ export default () => (
             <li></li>
             <li></li>
         </ul>
-        <code>v - 1.0.3 Comment and like now is real</code>
+        <code>v - 1.0.4 post comments now is real</code>
 
     </div>
 )
