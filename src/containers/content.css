@@ -337,6 +337,10 @@ video{
 /* responsive */
 
 @media screen and (max-width: 760px) {
+    #square{
+        margin-left: 0;
+        margin-right: 0;
+    }
     .container {
         width: 100% !important;
         flex-wrap: wrap;

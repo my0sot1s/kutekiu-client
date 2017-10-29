@@ -18,7 +18,7 @@ export default (props) => (
                 <p>
                     <Link to={{
                         pathname: `/profile/${props.data.user.username}`,
-                      
+
                     }}>{props.data.user.displayName}</Link>
                     <span>- {timeAgo(props.data.post.created)} ago</span>
                 </p>
@@ -29,10 +29,10 @@ export default (props) => (
             </div>
         </div>
         <div className="main_content">
-            <Link to={{pathname:`/post/${props.data.post.id}`,state: { modal: true }}}>
+            <Link to={{ pathname: `/post/${props.data.post.id}`, state: { modal: true } }}>
                 <div className="content_img" >
-                    {props.data.post.media.map(med => {
-                        return <img src={med.url} alt={med.public_id} />
+                    {props.data.post.media.map((med, key) => {
+                        return <img src={med.url} alt={med.public_id} key={key} />
                     })}
                 </div>
             </Link>

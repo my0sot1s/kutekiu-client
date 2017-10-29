@@ -160,3 +160,12 @@
         -webkit-transform:scale(.5); 
     }
 }
+
+
+/* responsive */
+
+@media screen and (max-width: 760px) {
+    #wrap_img{
+        background-image: url(http://res.cloudinary.com/telosma/image/upload/v1508175154/twvcj0gyudjmw9gkyp3e.jpg);
+    }
+}

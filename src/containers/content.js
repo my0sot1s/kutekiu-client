@@ -21,7 +21,7 @@ class Content extends Component {
             tbRight: [],
             page: 1, limit: 4,
             dofetch: false,
-            curMedia: []
+            curMedia: [],
             // date: new Date()
         }
     }
@@ -38,7 +38,7 @@ class Content extends Component {
     }
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll.bind(this));
-        this.setState({ dofetch:true },()=>{
+        this.setState({ dofetch: true }, () => {
             this.fetchAction()
         })
     }
@@ -49,11 +49,10 @@ class Content extends Component {
         var scrollTop = document.documentElement.scrollTop,
             scrollHeight = document.documentElement.scrollHeight,
             possion = scrollHeight - document.documentElement.clientHeight;
-        if (scrollTop / possion > 0.7) {
+        if (scrollTop / possion > 0.7 && !this.state.dofetch && !this.state.endOfData) {
             this.setState((prevState) => ({
                 page: prevState.page + 1,
-                dofetch:true 
-                // doUpdate: true,
+                dofetch: true
                 // showModal: false
             }), () => {
                 this.fetchAction(this.state.page);
@@ -65,31 +64,33 @@ class Content extends Component {
         if (nextProps.timeline.meta.status === 201) {
             console.log("False fetch server")
         }
-        else if(this.state.dofetch) {
+        else if (this.state.dofetch) {
             //render lần đầu tiên
-            let _d = nextProps.timeline.data, tbLeft = [], tbRight = []
-            for (var i = 0; i < _d.length; i++) {
-                if (i % 2 === 0) tbLeft.push(_d[i])
-                else tbRight.push(_d[i])
-            }
-            this.setState(prevState => {
-                if (prevState.tbLeft.length > 0) {
-                    return {
-                        tbLeft: [...prevState.tbLeft, ...tbLeft],
-                        tbRight: [...prevState.tbRight, ...tbRight],
-                        dofetch:false
+            if (nextProps.timeline.data.length === 0) this.setState({ endOfData: true })
+            else {
+                let tbLeft = [], tbRight = []
+                nextProps.timeline.data.map((value, index) => {
+                    if (index % 2 === 0) tbLeft.push(value)
+                    else tbRight.push(value)
+                })
+                this.setState(prevState => {
+                    if (prevState.tbLeft.length > 0) {
+                        return {
+                            tbLeft: [...prevState.tbLeft, ...tbLeft],
+                            tbRight: [...prevState.tbRight, ...tbRight],
+                            dofetch: false
+                        }
                     }
-                }
-                else {
-                    return { tbLeft, tbRight,dofetch:false }
-                }
-            })
-        }
+                    else {
+                        return { tbLeft, tbRight, dofetch: false }
+                    }
+                })
+            }
+        } else return;
     }
-    openModal(media) {
-        debugger
-        this.setState({ isShowModel: true, curMedia: media })
-    }
+    // openModal(media) {
+    //     this.setState({ isShowModel: true, curMedia: media })
+    // }
     render() {
         if (this.state.tbLeft.length === 0)
             return <Loader />
@@ -98,19 +99,19 @@ class Content extends Component {
                 <div>
                     {/* <ImageUpload /> */}
                     <div id="square">
-                    <div className="container" >
-                        <div className="content">
-                            {this.state.tbLeft.map((value, index) => {
-                                return <Cell data={value} openModal={this.openModal.bind(this) } key={index}/>
-                            })}
+                        <div className="container" >
+                            <div className="content">
+                                {this.state.tbLeft.map((value, index) => {
+                                    return <Cell data={value} key={index} />
+                                })}
+                            </div>
+                            <div className="content">
+                                {this.state.tbRight.map((value, index) => {
+                                    return <Cell data={value} key={index} />
+                                })}
+                            </div>
                         </div>
-                        <div className="content">
-                            {this.state.tbRight.map((value, index) => {
-                                return <Cell data={value} openModal={this.openModal.bind(this)}key={index} />
-                            })}
-                        </div>
-                    </div >
-                    {/* <Modal showModal={this.state.isShowModel}>
+                        {/* <Modal showModal={this.state.isShowModel}>
                         <DetailRender media={this.state.curMedia} />
                     </Modal> */}
                     </div>

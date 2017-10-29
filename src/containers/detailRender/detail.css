@@ -34,7 +34,7 @@
     max-width: 100%;
 }
 .slick-arrow{
-    background: blue;
+    background: rgb(158, 158, 158);
 }
 .slick-list{
     max-height: 90vh;
