@@ -1,4 +1,4 @@
-import { AFTER_LOGIN } from '../types/login'
+import { AFTER_LOGIN, AFTER_LOGOUT, AFTER_REGISTER } from '../types/login'
 
 /**
  * struture
@@ -22,6 +22,11 @@ export default (state = initState, { type, data, status, message }) => {
 
     switch (type) {
         case AFTER_LOGIN:
+            return { ...state, data: data, meta: { status: status ? status : 201, message } }
+        case AFTER_LOGOUT:
+            return { data: null, meta: { status: 0 } }
+
+        case AFTER_REGISTER:
             return { ...state, data: data, meta: { status, message } }
         default: return state;
     }

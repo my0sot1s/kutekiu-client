@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/comment'
+import _ from "lodash"
 require("./comment.css")
 
 class Comments extends Component {
@@ -40,19 +41,21 @@ class Comments extends Component {
         }
     }
     componentWillReceiveProps(nextProps) {
-        if (nextProps.commentReducer.meta.status === 200) {
-            var len = nextProps.comment.length, user = {
-                displayName: nextProps.login.data.displayName,
-                avatar: "http://res.cloudinary.com/telosma/image/upload/v1508249694/public/15622472_1030514373720458_1346459383963009368_n.jpg"
-            };
+        if (nextProps.commentReducer.meta.status === 200 && nextProps.login.data) {
+            var len = nextProps.comment.length,
+                user = {
+                    displayName: nextProps.login.data.displayName,
+                    avatar: nextProps.login.data.avatar
+                };
             for (var i = 0; i < len; i++) {
                 if (nextProps.comment[i].data.post_id === nextProps.commentReducer.data.post_id) {
                     if (len === 0 || len === 1)
                         this.setState({ _comment: { data: nextProps.commentReducer.data, user } })
                     else {
                         let comment = nextProps.comment;
-                        comment[1].data = comment[0].data;
+                        comment[1] = _.clone(comment[0]);
                         comment[0].data = nextProps.commentReducer.data;
+                        comment[0].user = user;
                         this.setState({ _comment: comment })
                     }
                     break;
@@ -67,7 +70,7 @@ class Comments extends Component {
             <ul className="content_comment">
                 <li>
                     <span>
-                        <input type="text" placeholder="Nhập comment..." value={this.state.value}
+                        <input type="text" placeholder="Nhập comment..."
                             ref={cmt => this.cmt = cmt}
                             onKeyPress={this._handleKeyPress.bind(this)} />
                         <a onClick={this.sendComment.bind(this)}>

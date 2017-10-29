@@ -61,11 +61,7 @@ class Content extends Component {
     }
     componentWillReceiveProps(nextProps) {
 
-        if (nextProps.timeline.meta.status === 201) {
-            console.log("False fetch server")
-        }
-        else if (this.state.dofetch) {
-            //render lần đầu tiên
+        if (nextProps.timeline.meta.status === 200 && this.state.dofetch) {
             if (nextProps.timeline.data.length === 0) this.setState({ endOfData: true })
             else {
                 let tbLeft = [], tbRight = []
@@ -86,7 +82,10 @@ class Content extends Component {
                     }
                 })
             }
-        } else return;
+        }
+        else {
+            console.error("Cannot fetch", nextProps.timeline.meta)
+        }
     }
     // openModal(media) {
     //     this.setState({ isShowModel: true, curMedia: media })
