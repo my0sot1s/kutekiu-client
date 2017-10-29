@@ -33,7 +33,7 @@ class Content extends Component {
     fetchAction(page) {
         if (!page) page = 1;
         this.props.acts.getTimeline(
-            `https://kutekiu.herokuapp.com/api/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}`);
+            `/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}`);
         // `http://localhost:3003/api/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}&date=${this.state.date.toDateString()}`);
     }
     componentDidMount() {

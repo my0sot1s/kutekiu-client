@@ -26,10 +26,9 @@ class DetailRender extends Component {
     fetchAction() {
         this.props.acts.getDetail(
             // `http://localhost:3003/api/social_post/get-post?user_id=${this.state.user_id}&limit=${this.state.limit}&page=${page}`);
-            `https://kutekiu.herokuapp.com/api/social_post/get-post-by-id?post_id=${this.state.post_id}`);
+            `/social_post/get-post-by-id?post_id=${this.state.post_id}`);
     }
     componentDidMount() {
-        // https://kutekiu.herokuapp.com/api/social_post/get-post?user_id=18&limit=5
         this.setState({ post_id: this.props.match.params.post_id }, () => {
             this.fetchAction()
         })

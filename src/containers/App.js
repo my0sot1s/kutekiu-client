@@ -10,7 +10,8 @@ import Profile from './profile'
 import Loader from './loader/loader'
 import DetailRender from './detailRender/detailRender'
 import Modal from './components/modal'
-let fetch = require("../actions/fetcher").default;
+import Login from "./components/login"
+let fetch = require("../actions/fetcher").freeFetch;
 
 // import Footer from './components/Footer'
 // import Modal from "./components/modal"
@@ -57,6 +58,7 @@ class AppBase extends Component {
             return (
                 <div id="app" >
                     <Head />
+                    <Login />
                     <Switch location={isModal ? this.previousLocation : location}>
                         <Route exact path="/" component={Container} />
                         <Route path="/profile/:username" component={Profile} />

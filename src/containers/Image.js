@@ -28,7 +28,7 @@ class Image extends Component {
     fetchAction(page) {
         if (!page) page = 0;
         this.props.dsac.getImages(
-            `https://kutekiu.herokuapp.com/api/Image/getImage?limit=${this.state.limit}&page=${page}`);
+            `/Image/getImage?limit=${this.state.limit}&page=${page}`);
     }
     componentDidMount() {
         this.fetchAction();

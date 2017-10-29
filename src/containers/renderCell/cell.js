@@ -39,8 +39,8 @@ export default (props) => (
             <div className="content_count">
                 <p>{props.data.like} loves {props.data.comment.count} comments</p>
             </div>
-            <Action />
-            <Comment comment={props.data.comment.cmt} />
+            <Action post_id={props.data.post.id}/>
+            <Comment comment={props.data.comment.cmt} post_id={props.data.post.id} />
         </div>
     </div >
 )

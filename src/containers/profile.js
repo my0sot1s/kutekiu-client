@@ -28,10 +28,9 @@ class Profile extends Component {
         if (!page) page = 0;
         this.props.acts.getProfile(
             // `http://localhost:3003/api/social_post/get-post?user_id=${this.state.user_id}&limit=${this.state.limit}&page=${page}`);
-            `https://kutekiu.herokuapp.com/api/social_post/get-user-post?username=${this.state.username}&limit=${this.state.limit}&page=${page}`);
+            `/social_post/get-user-post?username=${this.state.username}&limit=${this.state.limit}&page=${page}`);
     }
     componentDidMount() {
-        // https://kutekiu.herokuapp.com/api/social_post/get-post?user_id=18&limit=5
         this.fetchAction()
     }
     componentWillReceiveProps(nextProps) {
