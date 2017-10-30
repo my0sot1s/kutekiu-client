@@ -43,9 +43,10 @@ class Comments extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.commentReducer.meta.status === 200 && nextProps.login.data) {
             var len = nextProps.comment.length,
+                _userData = _.clone(nextProps.login.data),
                 user = {
-                    displayName: nextProps.login.data.displayName,
-                    avatar: nextProps.login.data.avatar
+                    displayName: _userData.displayName,
+                    avatar: _userData.avatar
                 };
             for (var i = 0; i < len; i++) {
                 if (nextProps.comment[i].data.post_id === nextProps.commentReducer.data.post_id) {

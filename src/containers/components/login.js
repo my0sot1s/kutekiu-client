@@ -19,14 +19,14 @@ class Login extends Component {
             `/UserInfo/login`, username, password);
     }
     componentWillReceiveProps(nextProps) {
-        debugger
         if (nextProps.login.meta.status === 200 && nextProps.login.data) {
             this.setState({ isLogin: true, info: nextProps.login.data })
             this.username.value = "";
             this.password.value = "";
-        } else if (nextProps.login.meta.status === 0 || nextProps.login.meta.status === undefined) {
-            alert("Login first plz")
         }
+        // else if (nextProps.login.meta.status === 0 || nextProps.login.meta.status === undefined) {
+        //     alert("Login first plz")
+        // }
         else if (nextProps.login.meta.status === 201) {
             alert("Login not successfull")
         }

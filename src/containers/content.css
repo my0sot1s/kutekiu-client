@@ -204,7 +204,8 @@ video{
     margin-left: 4px;
 }
 .content_comment{
-    height: fit-content;
+    height: 100%;;
+    overflow: auto;;
 }
 .content_comment li{
     margin-top: 3px;

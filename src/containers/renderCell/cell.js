@@ -4,14 +4,14 @@ import Comment from "../comments/comment"
 import Action from "../actions/actions"
 import { timeAgo } from "../../utils/timeProcess"
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-
+import { img2ava } from '../../utils/avatar'
 require("./cell.css")
 
 export default (props) => (
     <div className="content_item">
         <div className="content_avatar">
             <div className="content_avatar_img"> </div>
-            <img src={props.data.user.avatar} tag={props.data.user.username} />
+            <img src={img2ava(props.data.user.avatar)} tag={props.data.user.username} />
         </div>
         <div className="content_user">
             <div className="content_user_name">
@@ -39,7 +39,7 @@ export default (props) => (
             <div className="content_count">
                 <p>{props.data.like} loves {props.data.comment.count} comments</p>
             </div>
-            <Action post_id={props.data.post.id}/>
+            <Action post_id={props.data.post.id} />
             <Comment comment={props.data.comment.cmt} post_id={props.data.post.id} />
         </div>
     </div >

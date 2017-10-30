@@ -1,6 +1,6 @@
 .img_main{
     width: 100%;
-    height: fit-content;
+    height: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;

@@ -1,4 +1,4 @@
-import { AFTER_COMMENT } from '../types/comment'
+import { AFTER_COMMENT,AFTER_GET_COMMENT } from '../types/comment'
 
 /**
  * struture
@@ -22,6 +22,8 @@ export default (state = initState, { type, data, status, message }) => {
 
     switch (type) {
         case AFTER_COMMENT:
+            return { ...state, data: data, meta: { status, message } }
+        case AFTER_GET_COMMENT:
             return { ...state, data: data, meta: { status, message } }
         default: return state;
     }
