@@ -1,4 +1,4 @@
-form {
+.register form {
     box-sizing: border-box;
     width: 450px;
     margin: 100px auto 0;
@@ -6,11 +6,11 @@ form {
     padding-bottom: 40px;
     border-radius: 3px;
   }
-  .info{
+  .register_info{
     margin: auto;
     width: 75%;
   }
-   input {
+ .register_info  input {
     width: 350px;
     margin-bottom: 45px;
     display: block;
@@ -23,29 +23,29 @@ form {
     background-repeat: no-repeat;
     color: #64be30;
   }
- input:focus, input:valid {
+.register_info input:focus, input:valid {
     box-shadow: none;
     outline: none;
     background-position: 0 0;
   }
  
- h2{
+.register h2{
     box-sizing: border-box;
     text-align: center;
     color: #64be30;
     padding-top: 20px;
   }
-  select {
+.register_info select {
       color: #64be30;
       margin-bottom: 45px;
       width: 350px;
       background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #64be30 4%);
   }
-  #submit {
+  .register_submit {
       margin: auto;
       width: 50%;
   }
-  button {
+  .register_submit button {
     width: 200px;
     margin-bottom: 25px;
     align-content: center;
@@ -57,6 +57,6 @@ form {
     color: white;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
   }
-  button:hover {
+ .register_submit button:hover {
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
   }

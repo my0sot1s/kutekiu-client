@@ -1,4 +1,4 @@
-form {
+.login form {
     box-sizing: border-box;
     width: 350px;
     margin: 100px auto 0;
@@ -6,11 +6,11 @@ form {
     padding-bottom: 40px;
     border-radius: 3px;
   }
-  .info{
+.login_info{
     margin: auto;
     width: 75%;
   }
-  .info input {
+.login_info input {
     width: 250px;
     margin-bottom: 45px;
     display: block;
@@ -23,29 +23,29 @@ form {
     background-repeat: no-repeat;
     color: #64be30;
   }
-  .rem{
+.login_rem{
     margin: auto;
     width: 75%;
   }
-  .rem a{
+.login_rem a{
     color: #64be30;
     margin-left: 25px;
     text-decoration: none;
   }
-  form h2{
+.login h2{
     box-sizing: border-box;
     text-align: center;
     color: #64be30;
     padding-top: 20px;
   }
- .info input:focus, input:valid {
+.login_rem input:focus, input:valid {
     box-shadow: none;
     outline: none;
     background-position: 0 0;
   }
 
    
-  button {
+.login_rem  button {
     width: 250px;
     margin-bottom: 25px;
     align-content: center;
@@ -57,6 +57,6 @@ form {
     color: white;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
   }
-  button:hover {
+.login_rem  button:hover {
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
   }
