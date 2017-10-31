@@ -1,0 +1,51 @@
+
+.friend_list{
+    /* flex:0.25; */
+    width: 5%;
+    position: fixed;
+    flex-direction: column;
+    right: 0;
+    top:7vh;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    height: 100%;
+    border: 1px solid rgba(238, 238, 238, 0.774);
+    margin-top: 5px;
+    border-radius: 0.3em;
+}
+.friend_list_wraper {
+    width: 100%;
+    /* height: auto; */
+    /* min-height: 30px; */
+   
+    overflow: hidden;
+    padding-top: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.friend_list_wraper img{
+    width: 60px;
+    height: 60px;
+    /* height: 100%; */
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.friend_list_wraper h5{
+    text-align: center;
+    /* text-transform: uppercase;  */
+}
+.friend_list_wraper p{
+    position: absolute;
+    top: 45%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    /* height: 10px; */
+    z-index: 200;
+    font-size: 1.1em;
+}

@@ -11,6 +11,9 @@ import _ from 'lodash';
 import Modal from "./components/modal"
 
 import DetailRender from './detailRender/detailRender'
+import TagList from './taglist/taglist'
+import FriendList from './friendlist/friendlist'
+
 require("./content.css")
 
 class Content extends Component {
@@ -96,9 +99,10 @@ class Content extends Component {
         else
             return (
                 <div>
-                    {/* <ImageUpload /> */}
-                    <div id="square">
-                        <div className="container" >
+                    <section class="main_conatiner">
+                        <TagList />
+
+                        <section className="container" >
                             <div className="content">
                                 {this.state.tbLeft.map((value, index) => {
                                     return <Cell data={value} key={index} />
@@ -109,11 +113,11 @@ class Content extends Component {
                                     return <Cell data={value} key={index} />
                                 })}
                             </div>
-                        </div>
-                        {/* <Modal showModal={this.state.isShowModel}>
-                        <DetailRender media={this.state.curMedia} />
-                    </Modal> */}
-                    </div>
+                        </section>
+
+                        <section class="option_list"></section>
+                        <FriendList />
+                    </section>
                 </div>
             );
     }

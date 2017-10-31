@@ -11,6 +11,9 @@ import Loader from './loader/loader'
 import DetailRender from './detailRender/detailRender'
 import Modal from './components/modal'
 import Login from "./components/login"
+import Header from './header/header'
+
+
 let fetch = require("../actions/fetcher").freeFetch;
 
 // import Footer from './components/Footer'
@@ -58,14 +61,15 @@ class AppBase extends Component {
             return (
                 <div id="app" >
                     <Head />
-                    <Login />
+                    {/* <Login /> */}
+                    <Header />
                     <Switch location={isModal ? this.previousLocation : location}>
                         <Route exact path="/" component={Container} />
                         <Route path="/profile/:username" component={Profile} />
                         <Route path="/post/:post_id" component={DetailRender} />
                     </Switch>
                     {isModal ? <Route path='/post/:post_id' component={Modal} /> : null}
-                </div>
+                </div >
             );
     }
 }

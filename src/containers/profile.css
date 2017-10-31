@@ -9,7 +9,8 @@
 .sidebar{
     position: fixed;
     width:30%;
-    height: 95%
+    height: 95%;
+    margin-top: 7vh;
 }
 .header_timeline{
     width: 100%;
@@ -95,7 +96,8 @@
     display: flex;
     flex-direction: column;
     transition-duration: 1.1s;
-    margin-left: 42%;
+    margin-top:7vh;
+    margin-left: 45%;
 }
 
 @media screen and (max-width: 760px) {
