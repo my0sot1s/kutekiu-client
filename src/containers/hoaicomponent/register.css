@@ -1,0 +1,62 @@
+.register form {
+    box-sizing: border-box;
+    width: 450px;
+    margin: 100px auto 0;
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+    padding-bottom: 40px;
+    border-radius: 3px;
+  }
+  .register_info{
+    margin: auto;
+    width: 75%;
+  }
+ .register_info  input {
+    width: 350px;
+    margin-bottom: 45px;
+    display: block;
+    border: none;
+    padding: 10px 0;
+    border-bottom: solid 1px #64be30;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #64be30 4%);
+    background-position: -340px 0;
+    background-size: 340px 100%;
+    background-repeat: no-repeat;
+    color: #64be30;
+  }
+.register_info input:focus, input:valid {
+    box-shadow: none;
+    outline: none;
+    background-position: 0 0;
+  }
+ 
+.register h2{
+    box-sizing: border-box;
+    text-align: center;
+    color: #64be30;
+    padding-top: 20px;
+  }
+.register_info select {
+      color: #64be30;
+      margin-bottom: 45px;
+      width: 350px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #64be30 4%);
+  }
+  .register_submit {
+      margin: auto;
+      width: 50%;
+  }
+  .register_submit button {
+    width: 200px;
+    margin-bottom: 25px;
+    align-content: center;
+    border: none;
+    background: #64be30;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 6px;
+    color: white;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  }
+ .register_submit button:hover {
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+  }

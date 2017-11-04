@@ -42,7 +42,7 @@ export const freeFetch = (url) => new Promise(function (resolve, reject) {
 export const doPost = (url, body) => {
 
     return new Promise(function (resolve, reject) {
-        fetch(HOST + url, {
+        fetch(DEV + url, {
             // credentials: 'include', //pass cookies, for authentication
             method: 'POST',
             headers: {
@@ -51,7 +51,7 @@ export const doPost = (url, body) => {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
                 "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
             },
-            data: body,
+            body,
         })
             .then(function (response) {
                 if (response.status >= 400) {
@@ -68,7 +68,7 @@ export const doPost = (url, body) => {
 
 export const doUpload = (url, body) => {
     return new Promise((resolve, reject) => {
-        fetch(DEV + url, {
+        fetch(HOST + url, {
             // credentials: 'include', //pass cookies, for authentication
             method: 'POST',
             headers: {
