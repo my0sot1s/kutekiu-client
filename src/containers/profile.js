@@ -6,7 +6,7 @@ import _ from 'lodash';
 import Sidebar from './sidebar/sidebar'
 import Cell from './renderCell/cell'
 import Loader from './loader/loader'
-
+import Header from './header/header'
 require("./profile.css")
 
 class Profile extends Component {
@@ -43,6 +43,8 @@ class Profile extends Component {
     render() {
         if (!this.state.user) return <Loader />
         return (
+           <div>
+            <Header />
             <div class="container">
                 <Sidebar data={this.state.user} />
                 <div className="content2">
@@ -56,6 +58,8 @@ class Profile extends Component {
                     })}
                 </div>
             </div>
+
+           </div>
         );
     }
 }

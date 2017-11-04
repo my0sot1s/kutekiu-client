@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-
+import { Link } from 'react-router-dom';
 
 require("./header.css")
 
@@ -29,15 +29,21 @@ class Header extends Component {
                 <section className="nav_menu">
                     <ul className="nav_ul_menu">
                         <li>
-                            <a href="#">
+                            <Link to="/">
                                 <i className="fa fa-table" aria-hidden="true"></i>
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a href="#">
                                 <i className="fa fa-bell-o" aria-hidden="true"></i>
                             </a>
                         </li>
+                        <li>
+                            <Link to="/add">
+                                <i class="fa fa-camera" aria-hidden="true"></i>
+                            </Link>
+                        </li>
+                        
                         <li>
                             <a href="#">
                                 <i className="fa fa-sign-in" aria-hidden="true"></i>

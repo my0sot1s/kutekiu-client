@@ -5,7 +5,7 @@ import * as actions from '../actions/timeline'
 import Cell from './renderCell/cell'
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Loader from './loader/loader'
-import ImageUpload from './ImageUpload'
+// import ImageUpload from './ImageUpload'
 // import Loader from './components/loader'
 import _ from 'lodash';
 import Modal from "./components/modal"
@@ -13,7 +13,7 @@ import Modal from "./components/modal"
 import DetailRender from './detailRender/detailRender'
 import TagList from './taglist/taglist'
 import FriendList from './friendlist/friendlist'
-
+import Header from './header/header'
 require("./content.css")
 
 class Content extends Component {
@@ -99,9 +99,9 @@ class Content extends Component {
         else
             return (
                 <div>
+                    <Header/>
                     <section class="main_conatiner">
                         <TagList />
-
                         <section className="container" >
                             <div className="content">
                                 {this.state.tbLeft.map((value, index) => {

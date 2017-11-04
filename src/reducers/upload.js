@@ -1,4 +1,4 @@
-import { AFTER_LIST_IMAGES } from '../types/image'
+import { AFTER_UPLOAD } from '../types/upload'
 
 /**
  * struture
@@ -21,7 +21,7 @@ const initState = {
 export default (state = initState, { type, data, status, message }) => {
 
     switch (type) {
-        case AFTER_LIST_IMAGES:
+        case AFTER_UPLOAD:
             return { ...state, data: data, meta: { status, message } }
         default: return state;
     }

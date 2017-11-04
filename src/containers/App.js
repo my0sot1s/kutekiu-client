@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import Container from "./content"
 // import Container from "./image"
 import Head from './components/helmet'
-import ImageUpload from './ImageUpload'
+import ImageUpload from './upload/ImageUpload'
 import Nav from './components/nav'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import Profile from './profile'
 import Loader from './loader/loader'
-import DetailRender from './detailRender/detailRender'
-import Modal from './components/modal'
+import DetailRender,{RenderModal} from './detailRender/detailRender'
+// import ImageUpload from './components/modal'
 import Login from "./components/login"
 import Header from './header/header'
 
@@ -62,13 +62,15 @@ class AppBase extends Component {
                 <div id="app" >
                     <Head />
                     {/* <Login /> */}
-                    <Header />
+                    
                     <Switch location={isModal ? this.previousLocation : location}>
                         <Route exact path="/" component={Container} />
                         <Route path="/profile/:username" component={Profile} />
                         <Route path="/post/:post_id" component={DetailRender} />
+                        <Route path="/add" component={ImageUpload} />
                     </Switch>
-                    {isModal ? <Route path='/post/:post_id' component={Modal} /> : null}
+                    {isModal && /^(\/post)/.test(location.pathname)? <Route path='/post/:post_id' component={RenderModal} /> : null}
+                    {isModal && /^(\/add)/.test(location.pathname)? <Route path='/add' component={ImageUpload} /> : null}
                 </div >
             );
     }
