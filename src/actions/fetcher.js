@@ -42,7 +42,7 @@ export const freeFetch = (url) => new Promise(function (resolve, reject) {
 export const doPost = (url, body) => {
 
     return new Promise(function (resolve, reject) {
-        fetch(DEV + url, {
+        fetch(HOST + url, {
             // credentials: 'include', //pass cookies, for authentication
             method: 'POST',
             headers: {
