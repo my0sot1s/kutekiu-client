@@ -68,7 +68,7 @@ class Header extends Component {
                         </li>
                         <li>
                             <Link to={{ pathname: "/add", state: { modal: true } }}>
-                                <i class="fa fa-camera" aria-hidden="true"></i>
+                                <i className="fa fa-camera" aria-hidden="true"></i>
                             </Link>
                         </li>
                         {this.state.isLogin ?

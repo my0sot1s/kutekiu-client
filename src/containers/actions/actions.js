@@ -89,31 +89,31 @@ class ActionComponent extends Component {
     }
     render() {
         const { isLike } = this.state;
-        return <div class="content_action2">
-            <div class="content_action_access2">
-                <div class="action_item2">
-                <a onClick={this.clickAction.bind(this, 1)}>
-                    <i className={isLike ? this.state.like_icon2 : this.state.like_icon}
-                        aria-hidden="true"
-                        style={{ color: isLike ? this.state.like : this.state.unlike }}></i>
-                </a>
+        return <div className="content_action2">
+            <div className="content_action_access2">
+                <div className="action_item2">
+                    <a onClick={this.clickAction.bind(this, 1)}>
+                        <i className={isLike ? this.state.like_icon2 : this.state.like_icon}
+                            aria-hidden="true"
+                            style={{ color: isLike ? this.state.like : this.state.unlike }}></i>
+                    </a>
                 </div>
-                <div class="action_item2">
+                <div className="action_item2">
                     <a onClick={this.clickAction.bind(this, 2)}>
                         <i className="fa fa-random" aria-hidden="true"></i>
                     </a>
                 </div>
                 <span>
-                    <input type="text" placeholder="Nhập comment..." ref={cmt => this.cmt = cmt} 
-                        onKeyPress={this._handleKeyPress.bind(this)}/>
+                    <input type="text" placeholder="Nhập comment..." ref={cmt => this.cmt = cmt}
+                        onKeyPress={this._handleKeyPress.bind(this)} />
                     <a href="#">
-                        <i class="fa fa-telegram" aria-hidden="true"  onClick={this.sendComment.bind(this)}
-                        style={{ color: isLike ? this.state.like : this.state.unlike }}></i>
+                        <i className="fa fa-telegram" aria-hidden="true" onClick={this.sendComment.bind(this)}
+                            style={{ color: isLike ? this.state.like : this.state.unlike }}></i>
                     </a>
                 </span>
-                <div class="content_count2">
-                    <p>{this.props.like}<i class="fa fa-heart-o" aria-hidden="true"></i>
-                        {this.props.comment}<i class="fa fa-random" aria-hidden="true"></i>
+                <div className="content_count2">
+                    <p>{this.props.like}<i className="fa fa-heart-o" aria-hidden="true"></i>
+                        {this.props.comment}<i className="fa fa-random" aria-hidden="true"></i>
                     </p>
                 </div>
             </div>

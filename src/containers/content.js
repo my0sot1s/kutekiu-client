@@ -99,8 +99,8 @@ class Content extends Component {
         else
             return (
                 <div>
-                    <Header/>
-                    <section class="main_conatiner">
+                    <Header />
+                    <section className="main_conatiner">
                         <TagList />
                         <section className="container" >
                             <div className="content">
@@ -115,7 +115,7 @@ class Content extends Component {
                             </div>
                         </section>
 
-                        <section class="option_list"></section>
+                        <section className="option_list"></section>
                         <FriendList />
                     </section>
                 </div>

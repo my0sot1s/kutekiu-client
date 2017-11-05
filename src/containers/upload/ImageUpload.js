@@ -12,10 +12,21 @@ let ARRAY_FILTER = ['gif', 'png', 'jpg', 'jpeg']
 class ImageUpload extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { files: [], preview: null };
+        this.state = { files: [], preview: null, isLogin: false, info: {} };
     }
-    componentWillReceiveProps(nextProps) {
+    componentDidMount() {
+        this.props.login.data && this.props.login.meta.status === 200
+            ? this.setState({ isLogin: true, info: this.props.login.data })
+            : this.setState({ isLogin: false, info: this.props.login.data });
 
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.login.data && nextProps.login.meta.status === 200)
+            this.setState({ isLogin: true, info: nextProps.login.data })
+        if (nextProps.uploadPost.meta.status === 200) {
+            nextProps.history.push('/');
+        }
     }
     // handleFileAdded(file) {
     //     this.state.files.push(file);
@@ -62,14 +73,23 @@ class ImageUpload extends React.Component {
         this.setState({ preview: [] })
     }
     sendData() {
-        // debugger
-        let form = new FormData()
-        form.append('file', this.file.files[0], this.file.files[0].name)
-        form.append('file', this.file.files[1], this.file.files[1].name)
-        form.append('tag', this.tag.value)
-        form.append('post_content', this.post_content.value)
-        form.append('user_id', 15)
-        this.props.acts.upload('/social_post/create-post', form);
+        if (this.state.isLogin) {
+            let form = new FormData(),
+                { access_token, id } = this.props.login.data;
+            if (!access_token || !id) {
+                alert("Bạn phải đăng nhập trước"); return;
+            }
+            Array.from(this.file.files).forEach(file => {
+                form.append('file', file, file.name)
+            });
+            // form.append('file', this.file.files[0], this.file.files[0].name)
+            // form.append('file', this.file.files[1], this.file.files[1].name)
+            form.append('tag', this.tag.value)
+            form.append('post_content', this.post_content.value)
+            form.append('user_id', id)
+            this.props.acts.upload(`/social_post/create-post?access_token=${access_token}`, form);
+        }
+        else alert("Bạn phải đăng nhập trước")
     }
     render() {
         // For a list of all possible events (there are many), see README.md!
@@ -112,7 +132,7 @@ class ImageUpload extends React.Component {
 
 export default connect(
     // mapStateToProps
-    state => ({ uploadPost: state.uploadPost }),
+    state => ({ uploadPost: state.uploadPost, login: state.login }),
     // mapDispatchToProps
     dispatch => ({ acts: bindActionCreators(actions, dispatch) })
 )(ImageUpload)

@@ -40,12 +40,12 @@ export const how2render = (media) => {
                 return <img src={media[0].url} alt={media[0].public_id} />
             }
             case 2: {
-                return <div class="content_img_3">
-                    <div class="content_img_3_1">
+                return <div className="content_img_3">
+                    <div className="content_img_3_1">
                         <img src={media[0].url} alt={media[0].public_id} />
 
                     </div>
-                    <div class="content_img_3_1">
+                    <div className="content_img_3_1">
                         <img src={media[1].url} alt={media[1].public_id} />
                     </div>
                 </div>
@@ -56,12 +56,12 @@ export const how2render = (media) => {
                 // </div>
             }
             case 3: {
-                return <div class="content_img_3">
-                    <div class="content_img_3_1">
+                return <div className="content_img_3">
+                    <div className="content_img_3_1">
                         <img src={media[0].url} alt={media[0].public_id} />
 
                     </div>
-                    <div class="content_img_3_2">
+                    <div className="content_img_3_2">
                         <img src={media[1].url} alt={media[1].public_id} />
                         <img src={media[2].url} alt={media[2].public_id} />
                     </div>
