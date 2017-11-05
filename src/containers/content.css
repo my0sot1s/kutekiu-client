@@ -400,6 +400,7 @@ video{
     height: 35px;
     border-radius: 50%;
     align-self: flex-start;
+    object-fit: contain;
     -webkit-align-self: -webkit-flex-start;
 }
 .comment_avatar{

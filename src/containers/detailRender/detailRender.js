@@ -7,7 +7,7 @@ export default class DetailRender extends Component {
             return (
                 <div>
                     <Header/>
-                    <div class="slide_wrapper">
+                    <div className="slide_wrapper">
                         <Slider {...this.props}/>
                     </div>
                 </div>
