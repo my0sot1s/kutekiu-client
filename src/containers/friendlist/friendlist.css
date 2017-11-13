@@ -14,17 +14,21 @@
     border: 1px solid rgba(238, 238, 238, 0.774);
     margin-top: 5px;
     border-radius: 0.3em;
+    
 }
 .friend_list_wraper {
-    width: 100%;
+    /* width: 100%; */
     /* height: auto; */
     /* min-height: 30px; */
    
-    overflow: hidden;
-    padding-top: 10px;
+    /* overflow: hidden; */
+    margin-top: 3px;
+    padding-top: 5px;
     position: relative;
-    display: flex;
+    display: flex; 
     align-items: center;
+    /* display: inline-block; */
+    
 }
 .friend_list_wraper img{
     width: 60px;
@@ -32,20 +36,59 @@
     /* height: 100%; */
     border-radius: 50%;
     object-fit: cover;
+    box-shadow: 1px 2px 2px rgb(172, 172, 172);
 }
 
 .friend_list_wraper h5{
     text-align: center;
     /* text-transform: uppercase;  */
 }
-.friend_list_wraper p{
+/* .friend_list_wraper p{
     position: absolute;
     top: 45%;
     left: 0;
     width: 100%;
     text-align: center;
     color: #fff;
-    /* height: 10px; */
     z-index: 200;
     font-size: 1.1em;
+} */
+
+
+
+/* .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+} */
+
+.friend_list_wraper .tooltiptext {
+    /* visibility: hidden; */
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 100000;
+    top: -5px;
+    left: 110%;
+}
+
+.friend_list_wraper .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    z-index: 100000;
+    width: 120px;
+    height: 30px;
+    border-color: transparent black transparent transparent;
+}
+.friend_list_wraper:hover .tooltiptext {
+    visibility: visible;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/comment'
+import * as actionLike from '../../actions/actionLike'
 import _ from "lodash"
 
 require("./actions.css")
@@ -9,9 +10,8 @@ require("./actions.css")
 class ActionComponent extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
-            isLike: false,
+            isLike: this.props.liked || false,
             unlike: "#7c7c7c",
             like: "#f44277",
             like_icon: "fa fa-heart-o",
@@ -71,15 +71,17 @@ class ActionComponent extends Component {
                 };
             for (var i = 0; i < len; i++) {
                 if (nextProps.comment[i].data.post_id === nextProps.commentReducer.data.post_id) {
-                    if (len === 0 || len === 1)
-                        this.setState({ _comment: { data: nextProps.commentReducer.data, user } })
-                    else {
-                        let comment = nextProps.comment;
-                        comment[1] = _.clone(comment[0]);
-                        comment[0].data = nextProps.commentReducer.data;
-                        comment[0].user = user;
-                        this.setState({ _comment: comment })
-                    }
+                    // if (len === 0 || len === 1)
+                    //     this.setState({ _comment: { data: nextProps.commentReducer.data, user } })
+                    // else {
+                    //     let comment = nextProps.comment;
+                    //     comment[1] = _.clone(comment[0]);
+                    //     comment[0].data = nextProps.commentReducer.data;
+                    //     comment[0].user = user;
+                    //     this.setState({ _comment: comment })
+                    // }
+                    // break;
+                    this.setState({ _comment: { data: nextProps.commentReducer.data, user } })
                     break;
                 }
                 else continue;
@@ -92,10 +94,9 @@ class ActionComponent extends Component {
         return <div className="content_action2">
             <div className="content_action_access2">
                 <div className="action_item2">
-                    <a onClick={this.clickAction.bind(this, 1)}>
-                        <i className={isLike ? this.state.like_icon2 : this.state.like_icon}
-                            aria-hidden="true"
-                            style={{ color: isLike ? this.state.like : this.state.unlike }}></i>
+                    <a onClick={this.clickAction.bind(this, 1)}><i className={isLike ? this.state.like_icon2 : this.state.like_icon}
+                        aria-hidden="true"
+                        style={{ color: isLike ? this.state.like : this.state.unlike }}></i>
                     </a>
                 </div>
                 <div className="action_item2">
@@ -122,7 +123,11 @@ class ActionComponent extends Component {
 }
 export default connect(
     // mapStateToProps
-    state => ({ commentReducer: state.commentReducer, login: state.login }),
+    state => ({
+        commentReducer: state.commentReducer,
+        login: state.login,
+        actionLike: state.actionLike
+    }),
     // mapDispatchToProps
     dispatch => ({ acts: bindActionCreators(actions, dispatch) })
 )(ActionComponent)

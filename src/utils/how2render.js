@@ -1,5 +1,5 @@
 import React from 'react'
-
+// require('./how2Render.css')
 /**
  * 
  * @param {{width:number,height:number,url:string}} img 
@@ -69,5 +69,42 @@ export const how2render = (media) => {
             }
             default: return;
         }
+    }
+}
+
+
+export const pushToCell = media => {
+    if (!Array.isArray(media)) return <div />
+    else {
+        let len = media.length, dot = [];
+        for (var i = 1; i <= len; i++) {
+            dot.push(<label for={`img-${i}`} className="nav-dot" id={`img-dot-${i}`}></label>)
+        }
+        return (
+            <ul className="slides">
+                {media.map((value, index) => {
+                    return [(<input type="radio" name="radio-btn" id={`img-${index + 1}`} checked={index === 0 ? "checked" : ""} key={index} />),
+                    (<li className="slide-container">
+                        <div className="slide">
+                            <img src={`${value.url}`} tag={`${value.public_id}`} />
+                        </div>
+                        <div className="nav">
+                            <label htmlFor={index + 1 === 1 ? `img-${len}` : `img-${index}`} className="prev">&#x2039;</label>
+                            <label htmlFor={index + 1 === len ? `img-1` : `img-${index + 2}`} className="next">&#x203a;</label>
+                        </div>
+                    </li>)]
+                })}
+
+                <li className="nav-dots">
+                    {dot}
+                    {/* <label for="img-1" className="nav-dot" id="img-dot-1"></label>
+                    <label for="img-2" className="nav-dot" id="img-dot-2"></label>
+                    <label for="img-3" className="nav-dot" id="img-dot-3"></label>
+                    <label for="img-4" className="nav-dot" id="img-dot-4"></label>
+                    <label for="img-5" className="nav-dot" id="img-dot-5"></label>
+                    <label for="img-6" className="nav-dot" id="img-dot-6"></label> */}
+                </li>
+            </ul>
+        )
     }
 }

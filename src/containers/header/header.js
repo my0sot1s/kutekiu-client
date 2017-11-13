@@ -37,12 +37,15 @@ class Header extends Component {
 
     render() {
         return (
+
             <section className="header_section">
                 <section className="nav_wraper">
                     <section className="nav_own">
-                        <div className="nav_avatar"></div>
                         <div className="nav_name">
-                            <a id="user_name" href="#">Tể Nguyễn</a>
+                            <Link to="/" id="user_name">
+                                KiuKiu
+                            </Link>
+                            <span>Beautiful image</span>
                         </div>
                     </section>
                 </section>
@@ -57,19 +60,23 @@ class Header extends Component {
                 <section className="nav_menu">
                     <ul className="nav_ul_menu">
                         <li>
-                            <Link to="/">
+                            <a>
+                                {!this.state.info ?
+                                    <div className="nav_avatar"></div> :
+                                    <img src={this.state.info.avatar} className="nav_avatar" />}
+                                {/*  */}
+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void();">
                                 <i className="fa fa-table" aria-hidden="true"></i>
-                            </Link>
+                            </a>
                         </li>
                         <li>
                             <a href="#">
                                 <i className="fa fa-bell-o" aria-hidden="true"></i>
                             </a>
-                        </li>
-                        <li>
-                            <Link to={{ pathname: "/add", state: { modal: true } }}>
-                                <i className="fa fa-camera" aria-hidden="true"></i>
-                            </Link>
                         </li>
                         {this.state.isLogin ?
                             <li onClick={this.logOut.bind(this)}>
@@ -86,8 +93,10 @@ class Header extends Component {
                         }
                     </ul>
                 </section>
-                <section className="nav_options"></section>
-            </section >
+                <section className="nav_options">
+
+                </section>
+            </section>
         );
     }
 }

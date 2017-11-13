@@ -65,67 +65,72 @@ class Comments extends Component {
     // }
     render() {
         return (
-            <ul className="content_comment">
-                {this.props.comment.map((v, i) => 
-                    <li className="comment_item" key={i}>
-                    <div className="comment_header">
-                        {/* <div className="comment_avatar"></div> */}
-                        <img src={v.user.avatar} />
-                        <div className="comment_name_detail">
-                            <div className="comment_name_detail_name">
-                            <Link to={`/profile/${v.user.username}`}>{v.user.displayName}</Link>
+            <div className="expand">
+                <input type="checkbox" />
+                <p>❮</p>
+                <ul className="content_comment">
+                    {this.props.comment.map((v, i) =>
+                        <li className="comment_item" key={i}>
+                            <div className="comment_header">
+                                {/* <div className="comment_avatar"></div> */}
+                                <img src={v.user.avatar} />
+                                <div className="comment_name_detail">
+                                    <div className="comment_name_detail_name">
+                                        <Link to={`/profile/${v.user.username}`}>{v.user.displayName}</Link>
+                                    </div>
+                                    <div className="comment_name_detail_date">{timeAgo(v.data.created)} ago</div>
+                                </div>
+                                <div className="comment_content2">
+                                    {v.data.content}
+                                </div>
+                                <div className="comment_options">
+                                    <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                </div>
                             </div>
-                            <div className="comment_name_detail_date">{timeAgo(v.data.created)} ago</div>
+                        </li>
+                    )}
+                    {/* <li className="comment_item">
+                <div className="comment_header">
+                    <div className="comment_avatar"></div>
+                    <div className="comment_name_detail">
+                        <div className="comment_name_detail_name">
+                            <a href="">Minh Hoài</a>
                         </div>
-                        <div className="comment_content2">
-                        {v.data.content}
+                        <div className="comment_name_detail_date">1 min ago</div>
                     </div>
-                        <div className="comment_options">
-                            <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
-                        </div>
+                    <div className="comment_content2">
+                        Lâu lâu mới lại leo núi :v #hongha Lâu lâu mới lại leo núi :v #honghaLâu lâu mới lại leo núi :v #hongha
+                </div>
+                    <div className="comment_options">
+                        <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
                     </div>
-                </li>
-                )}
-                {/* <li className="comment_item">
-                    <div className="comment_header">
-                        <div className="comment_avatar"></div>
-                        <div className="comment_name_detail">
-                            <div className="comment_name_detail_name">
-                                <a href="">Minh Hoài</a>
-                            </div>
-                            <div className="comment_name_detail_date">1 min ago</div>
+                </div>
+            </li>
+            <li className="comment_item">
+                <div className="comment_header">
+                    <div className="comment_avatar"></div>
+                    <div className="comment_name_detail">
+                        <div className="comment_name_detail_name">
+                            <a href="">Hoàng Hiệp</a>
                         </div>
-                        <div className="comment_content2">
-                            Lâu lâu mới lại leo núi :v #hongha Lâu lâu mới lại leo núi :v #honghaLâu lâu mới lại leo núi :v #hongha
+                        <div className="comment_name_detail_date">1 h ago</div>
                     </div>
-                        <div className="comment_options">
-                            <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
-                        </div>
+                    <div className="comment_content2">
+                        <span>ảnh đẹp quá
+                        <a href="#">...more</a>
+                        </span>
                     </div>
-                </li>
-                <li className="comment_item">
-                    <div className="comment_header">
-                        <div className="comment_avatar"></div>
-                        <div className="comment_name_detail">
-                            <div className="comment_name_detail_name">
-                                <a href="">Hoàng Hiệp</a>
-                            </div>
-                            <div className="comment_name_detail_date">1 h ago</div>
-                        </div>
-                        <div className="comment_content2">
-                            <span>ảnh đẹp quá
-                            <a href="#">...more</a>
-                            </span>
-                        </div>
-                        <div className="comment_options">
-                            <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
-                        </div>
+                    <div className="comment_options">
+                        <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
                     </div>
-                </li> */}
-                <li>
-                    <a href="#">View more comment...</a>
-                </li>
-            </ul>
+                </div>
+            </li> */}
+                    <li>
+                        <a href="#">View more comment...</a>
+                    </li>
+                </ul>
+
+            </div>
         );
     }
 }

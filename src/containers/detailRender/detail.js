@@ -9,7 +9,7 @@ import { timeAgo } from "../../utils/timeProcess"
 import { img2ava } from '../../utils/avatar'
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
-
+import _ from "lodash"
 require("./merge.css");
 
 
@@ -22,8 +22,8 @@ class DetailRender extends Component {
             post_id: "",
             user: {},
             post: { media: [] }, cmtList: null,
-            slideIndex: 1,
-            isDone: false,
+            slideIndex: 1, isSendComment: false,
+            isDone: false
         }
     }
     /**
@@ -47,9 +47,28 @@ class DetailRender extends Component {
             this.fetchAction()
         })
     }
-    // componentWillReceiveProps(nextProps) {
-    //     this.setState({ media: nextProps.media })
-    // }
+    _handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            this.sendComment()
+        } else return;
+    }
+    sendComment() {
+        let comment = this.cmt.value
+            , access_token = this.props.login.data.access_token
+            , user_id = this.props.login.data.id
+            , post_id = this.props.post_id;
+        if (comment || comment.trim() !== "") {
+            // xóa bỏ kí tự đặc biệt
+            comment = comment.replace(/[\'\"\>\<\*\%\[\]]/g, '*');
+            if (!access_token || typeof access_token !== "string") alert("Login first!!")
+            else this.props.acts.postComment(
+                `/social_comments/add-comment?access_token=${access_token}`, user_id, post_id, comment);
+            this.cmt.value = "";
+            this.state.isSendComment = true
+        } else {
+            this.cmt.value = "";
+        }
+    }
     componentWillReceiveProps(nextProps) {
         if (nextProps.detail.meta.status === 200 && nextProps.comments.meta.status === 200) {
             if (this.state.isDone) {
@@ -63,6 +82,21 @@ class DetailRender extends Component {
                 cmtList: nextProps.comments.data.slice(0, 8),
                 isDone: true
             }, () => { this.showSlides(this.state.slideIndex); })
+            if (this.state.isSendComment && nextProps.commentReducer.meta.status === 200 && nextProps.login.data) {
+                var len = nextProps.comment.length,
+                    _userData = _.clone(nextProps.login.data),
+                    user = {
+                        displayName: _userData.displayName,
+                        avatar: _userData.avatar
+                    };
+                this.setState(prevS => {
+                    return {
+                        cmtList: prevS.cmtList.unshift({
+                            data: nextProps.commentReducer.data, user
+                        })
+                    }
+                })
+            }
         }
 
     }
@@ -72,6 +106,7 @@ class DetailRender extends Component {
     currentSlide(n) {
         this.showSlides(n);
     }
+
     showSlides(n) {
         var i, document = ReactDOM.findDOMNode(this);
         var slides = document.getElementsByClassName("mySlides");
@@ -143,17 +178,19 @@ class DetailRender extends Component {
                             <div className="cmt_captions">
                                 {this.state.post.post_content}
                             </div>
-                            <ul className="content_comment">
+                            <ul className="content_comment" style={{ maxHeight: 100 + '%' }}>
                                 <li>
                                     <span>
-                                        <input type="text" placeholder="Nhập comment..." />
+                                        <input type="text" placeholder="Nhập comment..."
+                                            onKeyPress={this._handleKeyPress.bind(this)} ref={cmt => this.cmt = cmt} />
                                         <a href="#">
-                                            <i className="fa fa-telegram" aria-hidden="true"></i>
+                                            <i className="fa fa-telegram" aria-hidden="true"
+                                                onClick={this.sendComment.bind(this)}></i>
                                         </a>
                                     </span>
                                 </li>
                                 {this.state.cmtList.map((value, index) => {
-                                    return <li className="comment_item">
+                                    return <li className="comment_item" key={index}>
                                         <div className="comment_header">
                                             {/* <div className="comment_avatar"></div> */}
                                             <img src={value.user.avatar} tag={value.user.username} className="comment_avatar" />
@@ -212,7 +249,7 @@ class DetailRender extends Component {
 export default
     connect(
         // mapStateToProps
-        state => ({ detail: state.detail, comments: state.commentReducer }),
+        state => ({ detail: state.detail, comments: state.commentReducer, login: state.login }),
         // mapDispatchToProps
         dispatch => ({ acts: bindActionCreators({ ...actions, ...actions2 }, dispatch) })
     )(DetailRender)

@@ -179,27 +179,45 @@ nav{
     margin-left: 5%;
 }
 .nav_own{
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
+    align-items: center; */
+    position: relative;
+    height: 100%;
 }
 .nav_avatar{
     height: 35px;
     width: 35px;
-    /* margin-top: 5px;
-    margin-bottom: 5px; */
     border-radius: 50%;
     background: #fff;
 }
 .nav_name{
     margin-left: 10px;
+    position: relative;
 }
-
+.nav_name a{
+    /* margin-left: 10px; */
+    font-family: 'Dancing Script', cursive;
+    color: #fff;
+    font-size: 2.2em;
+    position: absolute;
+    top:-25px;
+    left: 0;
+}
+.nav_name span{
+    font-family: 'Dancing Script', cursive;
+    color: #eee;
+    font-size: 0.85em;
+    bottom: -25px;;
+    position: absolute;
+    left: 60px;
+    width: 100%;
+}
 .nav_menu{
     /* margin-top: 5px; */
     /* width: 100%; */
-    flex: 2;
+    flex: 1.5;
     
 }
 .nav_ul_menu{
@@ -210,12 +228,15 @@ nav{
 .nav_ul_menu li{
     /* margin-top: 5px; */
     flex:1;
-    /* background: #eee; */
-}
-.nav_ul_menu li a{
     display: flex;
     justify-content: center;
     align-items: center;
+    /* background: #eee; */
+}
+.nav_ul_menu li a{
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
 }
 .nav_ul_menu li a i{
     /* margin: 7px; */

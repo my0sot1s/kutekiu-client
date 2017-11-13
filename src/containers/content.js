@@ -35,8 +35,15 @@ class Content extends Component {
      */
     fetchAction(page) {
         if (!page) page = 1;
-        this.props.acts.getTimeline(
-            `/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}`);
+
+        if (!this.props.login.data)
+            this.props.acts.getTimeline(
+                `/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}`);
+        else {
+            var user = this.props.login.data.id;
+            this.props.acts.getTimeline(
+                `/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}&user_id=${user}`);
+        }
         // `http://localhost:3003/api/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}&date=${this.state.date.toDateString()}`);
     }
     componentDidMount() {
@@ -100,8 +107,8 @@ class Content extends Component {
             return (
                 <div>
                     <Header />
+                    <TagList />
                     <section className="main_conatiner">
-                        <TagList />
                         <section className="container" >
                             <div className="content">
                                 {this.state.tbLeft.map((value, index) => {
@@ -124,7 +131,7 @@ class Content extends Component {
 }
 export default connect(
     // mapStateToProps
-    state => ({ timeline: state.timeline }),
+    state => ({ timeline: state.timeline, login: state.login }),
     // mapDispatchToProps
     dispatch => ({ acts: bindActionCreators(actions, dispatch) })
 )(Content)

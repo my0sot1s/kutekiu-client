@@ -15,5 +15,6 @@ export default require("redux").combineReducers({
     detail: require("./detail").default,
     login: persistReducer(setConfig("login"), require("./login").default),
     commentReducer: require("./comment").default,
-    uploadPost: require("./upload").default
+    uploadPost: require("./upload").default,
+    actionLike: require("./actionLike").default
 })
