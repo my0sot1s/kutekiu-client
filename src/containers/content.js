@@ -36,7 +36,7 @@ class Content extends Component {
     fetchAction(page) {
         if (!page) page = 1;
 
-        if (!this.props.login.data)
+        if (!this.props.login.data || !this.props.login.data.id)
             this.props.acts.getTimeline(
                 `/social_timelines/getTimeLine?limit=${this.state.limit}&page=${page}`);
         else {
