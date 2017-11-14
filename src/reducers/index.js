@@ -9,7 +9,7 @@ const setConfig = (key) => {
 }
 
 
-export default require("redux").combineReducers({
+export default {
     timeline: require("./timeline").default,
     profile: require("./profile").default,
     detail: require("./detail").default,
@@ -17,4 +17,4 @@ export default require("redux").combineReducers({
     commentReducer: require("./comment").default,
     uploadPost: require("./upload").default,
     actionLike: require("./actionLike").default
-})
+}

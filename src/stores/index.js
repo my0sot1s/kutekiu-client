@@ -21,7 +21,7 @@ export default initState => {
     const enhancer = compose(
         applyMiddleware(...middleware)
     )
-    const store = createStore(rootReducer, initState, enhancer)
+    const store = createStore(reducer, initState, enhancer)
     let persistor = persistStore(store)
     return { store, persistor }
 }
