@@ -25,7 +25,7 @@ class AppBase extends Component {
         super(props);
         this.state = {
             data: {},
-            services: [fetch("https://marcarita.herokuapp.com/"), fetch('https://kutekiu.herokuapp.com')]
+            services: [fetch('https://kutekiu.herokuapp.com')]
         }
     }
     previousLocation = this.props.location
