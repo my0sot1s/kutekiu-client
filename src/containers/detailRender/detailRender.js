@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Slider from './detail'
 import Header from '../header/header'
 import Modal from '../components/modal'
+
 export default class DetailRender extends Component {
     render() {
             return (

@@ -8,7 +8,7 @@ class FriendList extends Component {
                     <h5>Following</h5>
                 </div>
                 <div className="friend_list_wraper">
-                    <img src="http://res.cloudinary.com/telosma/image/upload/t_media_lib_thumb/v1509850275/m12adnscbtqvythn24km.jpg" />
+                    <img src="http://res.cloudinary.com/telosma/image/upload/t_media_lib_thumb/v1509370364/tag/computer.png" />
                     <span className="tooltiptext">Tê Nguyễn</span>
                 </div>
                 <div className="friend_list_wraper">
@@ -16,23 +16,15 @@ class FriendList extends Component {
                     <span className="tooltiptext">Any Girl</span>
                 </div>
                 <div className="friend_list_wraper">
+                    <img src="http://res.cloudinary.com/telosma/image/upload/t_media_lib_thumb/v1509370363/tag/boy.jpg" />
+                    <span className="tooltiptext">Any Girl</span>
+                </div>
+                <div className="friend_list_wraper">
                     <img src="http://res.cloudinary.com/telosma/image/upload/t_media_lib_thumb/v1510251328/tag/happy.jpg" />
                     <span className="tooltiptext">Any Girl</span>
                 </div>
                 <div className="friend_list_wraper">
-                    <img src="http://res.cloudinary.com/telosma/image/upload/t_media_lib_thumb/v1508260670/k6r4igsi2yxbop1i1a07.jpg" />
-                    <span className="tooltiptext">Any Girl</span>
-                </div>
-                <div className="friend_list_wraper">
-                    <img src="http://res.cloudinary.com/telosma/image/upload/t_media_lib_thumb/v1507474691/public/dq9ufs6okdtmonf9evb3.jpg" />
-                    <span className="tooltiptext">Any Girl</span>
-                </div>
-                <div className="friend_list_wraper">
-                    <img src="http://res.cloudinary.com/telosma/image/upload/t_media_lib_thumb/v1507457086/Base/qVnz4yw.jpg" />
-                    <span className="tooltiptext">Any Girl</span>
-                </div>
-                <div className="friend_list_wraper">
-                    <img src="http://res.cloudinary.com/telosma/image/upload/t_media_lib_thumb/v1507457078/Base/HwfCk3f.jpg" />
+                    <img src="http://res.cloudinary.com/telosma/image/upload/t_media_lib_thumb/v1509370362/tag/love.jpg" />
                     <span className="tooltiptext">Any Girl</span>
                 </div>
             </section>
