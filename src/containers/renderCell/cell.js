@@ -9,11 +9,11 @@ import Slider from 'react-slick'
 
 require("./cell.css")
 let settings = {
-    className: 'abc',
     dots: true,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
+    lazyLoad:true
     // adaptiveHeight: true
 }
 
@@ -44,9 +44,9 @@ class Celler extends React.PureComponent {
                         </p>
                     </div>
 
-                    <div className="content_user_cap">
-                        {this.props.data.post.post_content}
-                    </div>
+                    {/*<div className="content_user_cap">*/}
+                        {/*{this.props.data.post.post_content}*/}
+                    {/*</div>*/}
                 </div>
 
                 <div className="main_content">

@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 const Promise = require('bluebird')
-const HOST = 'https://kutekiu.herokuapp.com/api'
+const HOST = 'https://te-nguyen.herokuapp.com/api'
 const DEV = 'http://localhost:3003/api'
 /**
  * fetch by get data
